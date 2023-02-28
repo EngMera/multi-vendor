@@ -22,7 +22,7 @@
                     </li>
                     <!-- لوحة التحكم -->
                     <li class="nk-menu-item">
-                        <a href="{{url('/dashboard')}}" class="nk-menu-link">
+                        <a href="{{url('admin/dashboard')}}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-dashboard-fill"></em></span>
                             <span class="nk-menu-text"> الرئيسية</span><span class="nk-menu-badge">HOT</span>
                         </a>
@@ -38,6 +38,8 @@
                         </a>
                     </li>
                     <!--  زيارة المتجر -->
+
+                    
 
                     <!-- المتجر -->
                     <li class="nk-menu-heading">

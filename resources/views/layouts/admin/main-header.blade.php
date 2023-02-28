@@ -255,7 +255,7 @@
                                     <em class="icon ni ni-user-alt"></em>
                                 </div>
                                 <div class="user-info d-none d-xl-block">
-                                    <div class="user-name dropdown-indicator">{{Auth::user()->name}}</div>
+                                    <div class="user-name dropdown-indicator"></div>
                                 </div>
                             </div>
                         </a>
@@ -266,8 +266,8 @@
                                         <span>AB</span>
                                     </div>
                                     <div class="user-info">
-                                        <span class="lead-text">{{Auth::user()->name}}</span>
-                                        <span class="sub-text">{{Auth::user()->email}}</span>
+                                        <span class="lead-text"></span>
+                                        <span class="sub-text"></span>
                                     </div>
                                 </div>
                             </div>
@@ -282,7 +282,10 @@
                             <div class="dropdown-inner">
                                 <ul class="link-list">
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        <a href="{{url('admin/logout')}}" class="dropdown-item">
+                                            <em class="icon ni ni-signout"></em>تسجيل الخروج
+                                        </a>
+                                        {{-- <a class="dropdown-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                                       document.getElementById('logout-form').submit();">
                                             <em class="icon ni ni-signout"></em>
@@ -290,7 +293,7 @@
                                         </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf
-                                        </form> 
+                                        </form>  --}}
                                         
 
                                     </li>

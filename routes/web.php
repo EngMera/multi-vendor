@@ -20,4 +20,19 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/dashboard', function(){
+   return view('admin.pages.dashboard');
+})->middleware('auth')->name('dashboard');
+
+Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function () {
+    
+    Route::match(['get','post'],'login', 'AdminController@login');
+
+    Route::group(['middleware'=>'admin'],function(){
+         Route::get('dashboard','AdminController@dashboard');
+         Route::get('logout','AdminController@logout');
+
+    });
+});

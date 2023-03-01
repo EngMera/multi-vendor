@@ -53,6 +53,46 @@ class AdminController extends Controller
             return "false";
         }
     }
+
+    public function updateAdminDetails(Request $request)
+    {
+        if ($request->isMethod('post')) 
+        {
+            $data = $request->all();
+
+            $rules = [
+                'email' => 'required|email|max:255',
+                'name' => 'required|regex:/^[\pL\s\-]+$/u',
+                'mobile'=>'required|numeric',
+            ];
+
+            $customMessages = [
+                'email.required'=> 'يجب اضافة  عنوان البريد الالكتروني',
+                'email.email'=>'يجب ان يكون عنوان البريد الالكتروني متوفر',
+                'email.max'=>'يجب الا يزيد البريد عن 255',
+                'name.required'=>'يجب اضافة الاسم ',
+                'name.regex'=>'تنسيق الاسم غير صالح.',
+                'mobile.required'=>'يجب اضافة الاسم ',
+                'mobile.max'=>'يجب الا يزيد عن 10 ارقام  ',
+                'mobile.min'=>'يجب الا يقل عن 9 ارقام  ',
+                'mobile.numeric'=> 'يجب  ادخال ارقام فقط',
+            ];
+            
+            $this->validate($request, $rules , $customMessages);
+
+            Admin::where('id',Auth::guard('admin')->user()->id)->update([
+                'name'=> $data['name'],
+                'email'=> $data['email'],
+                // 'type'=> $data['type'],
+                'mobile'=> $data['mobile'],
+                'status'=> $request->status == true ?'1':'0',
+            ]);
+            return redirect()->back()->with('success_message','تم التعديل بنجاح !');
+
+        }
+        $admin =  Admin::where('email',Auth::guard('admin')->user()->email)->first();
+        return view('admin.settings.update-admin-details',compact('admin'));
+    }
     public function login(Request $request)
     {
         if ($request->isMethod('post')) 

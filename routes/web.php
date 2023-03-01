@@ -28,10 +28,23 @@ Route::get('/dashboard', function(){
 
 Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function () {
     
+    //admin login
     Route::match(['get','post'],'login', 'AdminController@login');
 
     Route::group(['middleware'=>'admin'],function(){
+         //admin dashboard
          Route::get('dashboard','AdminController@dashboard');
+
+         //update admin password
+         Route::match(['get','post'],'update-admin-password', 'AdminController@updateAdminPassword');
+
+         //check admin password
+         Route::post('check-admin-password', 'AdminController@checkAdminPassword');
+
+         //update admin details
+         Route::match(['get','post'],'update-admin-details', 'AdminController@updateAdminDetails');
+
+         //admin logout
          Route::get('logout','AdminController@logout');
 
     });

@@ -255,7 +255,7 @@
                                     <em class="icon ni ni-user-alt"></em>
                                 </div>
                                 <div class="user-info d-none d-xl-block">
-                                    <div class="user-name dropdown-indicator"></div>
+                                    <div class="user-name dropdown-indicator">{{Auth::guard('admin')->user()->name}}</div>
                                 </div>
                             </div>
                         </a>
@@ -266,8 +266,8 @@
                                         <span>AB</span>
                                     </div>
                                     <div class="user-info">
-                                        <span class="lead-text"></span>
-                                        <span class="sub-text"></span>
+                                        <span class="lead-text">{{Auth::guard('admin')->user()->name}}</span>
+                                        <span class="sub-text">{{Auth::guard('admin')->user()->email}}</span>
                                     </div>
                                 </div>
                             </div>

@@ -4,7 +4,7 @@
 @endsection
 
 @section('style')
-    الرئيسية
+    
 @endsection
 @section('content')
     <!-- content @s -->

@@ -24,7 +24,7 @@
 * 07. PREVIEWS
 ---------------------- **/
 /** 01. FONTS */
-@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200&display=swap');
 @font-face {
   font-family: 'Readex Pro', sans-serif;
   src: url("../fonts/DMSans-Bold.eot");
@@ -15852,7 +15852,7 @@ input[type=radio]:checked ~ label {
   background-color: #f5f6fa;
 }
 .form-file-input:lang(en) ~ .form-file-label::after {
-  content: "Browse";
+  content: "تصفح";
 }
 .form-file-input ~ .form-file-label[data-browse]::after {
   content: attr(data-browse);
@@ -15884,7 +15884,7 @@ input[type=radio]:checked ~ label {
   padding: 0.4375rem 1rem;
   line-height: 1.25rem;
   color: #3c4d62;
-  content: "Browse";
+  content: "تصفح";
   background-color: #ebeef2;
   border-right: inherit;
   border-radius: 4px 0 0 4px;

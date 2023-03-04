@@ -21,7 +21,6 @@ class Admin extends  Authenticatable
         'vendor_id',
         'image',
         'status',
-
     ];
     
 }

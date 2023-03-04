@@ -17,17 +17,19 @@ class VendorTableSeeder extends Seeder
     public function run()
     {
         DB::table('vendors')->truncate();
-        $vendor  = [
-            'name'=>'Eng Ameera',
-            'email'=>'ameera@gmail.com',
-            'address'=>'alsafa',
-            'city'=>'Jeddeh',
-            'country'=>'KSA',
-            'state'=>'jeddeh',
-            'pincode'=>'12312',
-            'mobile'=>'123123123',
-            'status'=>0
-        ];
-        Vendor::insert($vendor);
+
+        $vendor = new Vendor();
+
+        $vendor->name = 'Eng Ameera';
+        $vendor->email = 'ameera@gmail.com';
+        $vendor->address = 'alsafa' ;
+        $vendor->city = 'Jeddeh';
+        $vendor->country = 'KSA';
+        $vendor->state = 'jeddeh';
+        $vendor->pincode = '123123';
+        $vendor->mobile = '123123123' ;
+        $vendor->status = 0 ;
+
+        $vendor->save();
     }
 }

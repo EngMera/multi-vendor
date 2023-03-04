@@ -46,6 +46,25 @@
                     <!-- الاعدادات -->
 
                     <!-- الاعدادات-->
+                    @if (Auth::guard('admin')->user()->type=="vendor")
+                    <li class="nk-menu-item has-sub">
+                        <a href="#" class="nk-menu-link nk-menu-toggle">
+                            <span class="nk-menu-icon"><em class="icon ni ni-package-fill"></em></span>
+                            <span class="nk-menu-text">تفاصيل البائع</span>
+                        </a>
+                        <ul class="nk-menu-sub">
+                            <li class="nk-menu-item">
+                                <a href="{{ url('admin/update-vendor-details/personal') }}" class="nk-menu-link"><span class="nk-menu-text"> التفاصيل الشخصية   </span></a>
+                            </li>
+                            <li class="nk-menu-item">
+                                <a href="{{ url('admin/update-vendor-details/business') }}" class="nk-menu-link"><span class="nk-menu-text">تفاصيل العمل    </span></a>
+                            </li>
+                            <li class="nk-menu-item">
+                                <a href="{{ url('admin/update-vendor-details/bank') }}" class="nk-menu-link"><span class="nk-menu-text">التفاصيل المصرفية     </span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    @else
                     <li class="nk-menu-item has-sub">
                         <a href="#" class="nk-menu-link nk-menu-toggle">
                             <span class="nk-menu-icon"><em class="icon ni ni-package-fill"></em></span>
@@ -61,6 +80,8 @@
                            
                         </ul>
                     </li>
+                    @endif
+                    
                     <!-- الاعدادات-->
 
                     <!-- المتجر -->

@@ -400,6 +400,7 @@
   };
 
   // Dropzone @v1.1
+  Dropzone.autoDiscover = false;
   NioApp.Dropzone = function (elm, opt) {
     if ($(elm).exists()) {
       $(elm).each(function () {

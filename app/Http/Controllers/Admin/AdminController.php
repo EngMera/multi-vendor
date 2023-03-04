@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\Vendor;
+use App\Models\VendorsBusinessDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -39,6 +42,7 @@ class AdminController extends Controller
         $admin =  Admin::where('email',Auth::guard('admin')->user()->email)->first();
         return view('admin.settings.update-admin-password',compact('admin'));
     }
+
     public function checkAdminPassword(Request $request)
     {
         $data = $request->all();
@@ -54,6 +58,7 @@ class AdminController extends Controller
         }
     }
 
+  
     public function updateAdminDetails(Request $request)
     {
         if ($request->isMethod('post')) 
@@ -92,6 +97,99 @@ class AdminController extends Controller
         }
         $admin =  Admin::where('email',Auth::guard('admin')->user()->email)->first();
         return view('admin.settings.update-admin-details',compact('admin'));
+    }
+    public function updateVendorDetails($slug , Request $request)
+    {
+
+        if ($slug == "personal")
+        {
+            $vendor =  Vendor::where('id',Auth::guard('admin')->user()->vendor_id)->first();
+            if($request->isMethod('post'))
+            {
+                $data = $request->all();
+
+                $rules = [
+                    'vendor_name' => 'required|regex:/^[\pL\s\-]+$/u',
+                    'vendor_mobile'=>'required|numeric',
+                ];
+    
+                $customMessages = [
+                    'vendor_name.required'=>'يجب اضافة الاسم ',
+                    'vendor_name.regex'=>'تنسيق الاسم غير صالح.',
+                    'vendor_mobile.required'=>'يجب اضافة الاسم ',
+                    'vendor_mobile.max'=>'يجب الا يزيد عن 10 ارقام  ',
+                    'vendor_mobile.min'=>'يجب الا يقل عن 9 ارقام  ',
+                    'vendor_mobile.numeric'=> 'يجب  ادخال ارقام فقط',
+                ];
+                
+                $this->validate($request, $rules , $customMessages);
+                
+                
+                Admin::where('id',Auth::guard('admin')->user()->id)->update([
+                    'name'=> $data['vendor_name'],
+                    'mobile'=> $data['vendor_mobile'],
+                    'status'=> $request->status == true ?'1':'0',
+                ]);
+
+                Vendor::where('id',Auth::guard('admin')->user()->vendor_id)->update([
+                    'name'=> $data['vendor_name'],
+                    'address'=>$data['vendor_address'],
+                    'country'=>$data['vendor_country'],
+                    'city'=>$data['vendor_city'],
+                    'state'=>$data['vendor_state'],
+                    'pincode'=>$data['vendor_pincode'],
+                    'mobile'=> $data['vendor_mobile'],
+                    'status'=> $request->status == true ?'1':'0',
+                ]);
+                
+                return redirect()->back()->with('success_message','تم التعديل بنجاح !');
+            }
+        return view('admin.settings.update-vendor-details',compact('slug','vendor'));
+
+        }
+        elseif ($slug == "business")
+        {
+            if($request->isMethod('post'))
+            {
+                $data = $request->all();
+
+                $rules = [
+                    'shop_name' => 'required|regex:/^[\pL\s\-]+$/u',
+                    'shop_address' => 'required|regex:/^[\pL\s\-]+$/u',
+                    'shop_city'=>'required',
+                    'shop_country'=>'required',
+                    'shop_mobile'=>'required|numeric',
+                ];
+                
+                $customMessages = [
+                    'shop_name.required'=>'يجب اضافة اسم المتجر ',
+                    'shop_name.regex'=>'تنسيق الاسم غير صالح.',
+                    'shop_address.required'=>'يجب اضافة عنوان المتجر ',
+                    'shop_address.regex'=>'تنسيق العنوان غير صالح.',
+                    'shop_city.required'=>'يجب اضافة اسم المدينة ',
+                    'shop_country.required'=>'يجب اضافة اسم الدولة ',
+                    'shop_mobile.required'=>'يجب اضافة الاسم ',
+                    'shop_mobile.max'=>'يجب الا يزيد عن 10 ارقام  ',
+                    'shop_mobile.min'=>'يجب الا يقل عن 9 ارقام  ',
+                    'shop_mobile.numeric'=> 'يجب  ادخال ارقام فقط',
+                ];
+                $this->validate($request, $rules , $customMessages);
+
+                
+            }
+            $vendorBusiness =  VendorsBusinessDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->update([
+                
+            ]);
+            return view('admin.settings.update-vendor-details',compact('slug','vendorBusiness'));
+
+
+        }
+        elseif ($slug == "bank")
+        {
+
+        }
+        return view('admin.settings.update-vendor-details',compact('slug'));
+
     }
     public function login(Request $request)
     {

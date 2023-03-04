@@ -10,5 +10,18 @@ class Vendor extends Model
 {
     use HasFactory;
     protected $guard = 'admin';
+    protected $table = 'vendors';
+
+    protected $fillable = [
+        'name',
+        'email',
+        'address',
+        'city',
+        'country',
+        'state',
+        'pincode',
+        'mobile',
+        'status',
+    ];
     
 }

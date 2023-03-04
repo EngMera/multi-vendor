@@ -18,27 +18,36 @@ class AdminTableSeeder extends Seeder
     public function run()
     {
         DB::table('admins')->truncate();
-        $admin = [
-            ['id'=>'1',
+
+        $admin =  [
+            [
+            'id'=>1,
             'name'=>'EngMera',
             'email'=>'fordesigns5@gmail.com',
             'password'=>Hash::make('12345678'),
             'type'=>'superadmin',
-            'mobile'=>'01234567890',
+            'mobile'=> '01234567890',
             'vendor_id'=>0,
             'image'=>'',
-            'status'=>1,],
+            'status'=>1,
+            ],
 
-            ['id'=>'2',
-            'name'=>'Eng Ameera',
-            'email'=>'ameera@gmail.com',
+            [
+            'id'=>2,
+            'name'=>'Eng Mera',
+            'email'=>'fordesigns52@gmail.com',
             'password'=>Hash::make('12345678'),
             'type'=>'vendor',
-            'mobile'=>'123123123',
+            'mobile'=> '01234567890',
             'vendor_id'=>1,
             'image'=>'',
-            'status'=>1,],
+            'status'=>1,
+            ],
         ];
+
+       
+
         Admin::insert($admin);
+      
     }
 }

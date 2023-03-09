@@ -80,6 +80,40 @@
                            
                         </ul>
                     </li>
+                    <li class="nk-menu-item has-sub">
+                        <a href="#" class="nk-menu-link nk-menu-toggle">
+                            <span class="nk-menu-icon"><em class="icon ni ni-package-fill"></em></span>
+                            <span class="nk-menu-text"> إدارة المشرف</span>
+                        </a>
+                        <ul class="nk-menu-sub">
+                            <li class="nk-menu-item">
+                                <a href="{{ url('admin/admins/admin') }}" class="nk-menu-link"><span class="nk-menu-text">المشرفين    </span></a>
+                            </li>
+                            <li class="nk-menu-item">
+                                <a href="{{ url('admin/admins/subadmin') }}" class="nk-menu-link"><span class="nk-menu-text"> المشرفين الفرعيين  </span></a>
+                            </li>
+                            <li class="nk-menu-item">
+                                <a href="{{ url('admin/admins/vendor') }}" class="nk-menu-link"><span class="nk-menu-text"> البائعيين   </span></a>
+                            </li>
+                            <li class="nk-menu-item">
+                                <a href="{{ url('admin/admins/all') }}" class="nk-menu-link"><span class="nk-menu-text"> الجميع   </span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nk-menu-item has-sub">
+                        <a href="#" class="nk-menu-link nk-menu-toggle">
+                            <span class="nk-menu-icon"><em class="icon ni ni-package-fill"></em></span>
+                            <span class="nk-menu-text"> إدارة المستخدميين</span>
+                        </a>
+                        <ul class="nk-menu-sub">
+                            <li class="nk-menu-item">
+                                <a href="{{ url('admin/users') }}" class="nk-menu-link"><span class="nk-menu-text">المستخدميين    </span></a>
+                            </li>
+                            <li class="nk-menu-item">
+                                <a href="{{ url('admin/subscribers') }}" class="nk-menu-link"><span class="nk-menu-text"> المشتركين   </span></a>
+                            </li>
+                        </ul>
+                    </li>
                     @endif
                     
                     <!-- الاعدادات-->

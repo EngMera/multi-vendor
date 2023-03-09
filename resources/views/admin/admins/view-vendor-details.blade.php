@@ -16,125 +16,105 @@
                             <h4 class="title nk-block-title" style="color:#9d72ff">تعديل تفاصيل البائع  </h4>
                         </div>
                     </div>
-                    @if ($slug=="personal")
                     <div class="card">
                         <div class="card-inner">
                             <h6 class="title nk-block-title mb-4" style="color:#9d72ff"> التفاصيل الشخصية :      </h6>
-                            <form action="{{ url('admin/update-vendor-details/personal') }}" class="form-validate is-alter" method="POST"
-                                  name="updateAdminDetailsForm" id="updateAdminDetailsForm">
-                                @csrf
+                            <div class="row g-gs">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="vendor_name">اسم المستخدم  </label>
+                                        <div class="form-control-wrap">
+                                            <input type="text" class="form-control form-control-lg" id="vendor_name" name="vendor_name" placeholder="ادخل اسم المستخدم" value="{{$vendor['vendorPersonal']['name']}}" aria-invalid="false"required >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="vendor_address">العنوان </label>
+                                        <div class="form-control-wrap">
+                                            <input type="text" class="form-control form-control-lg" id="vendor_address" name="vendor_address"  placeholder="ادخل العنوان "  value="{{$vendor['vendorPersonal']['address']}}" aria-invalid="false"required >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="vendor_country">الدولة   </label>
+                                        <div class="form-control-wrap">
+                                            <input type="text" class="form-control form-control-lg" id="vendor_country" name="vendor_country" placeholder="ادخل  الدولة "   value="{{$vendor['vendorPersonal']['country']}}" aria-invalid="false"required >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="vendor_city">المدينة   </label>
+                                        <div class="form-control-wrap">
+                                            <input type="text" class="form-control form-control-lg" id="vendor_city" name="vendor_city" placeholder="ادخل اسم المدينة " value="{{$vendor['vendorPersonal']['city']}}"  aria-invalid="false"required >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="vendor_state">الولاية   </label>
+                                        <div class="form-control-wrap">
+                                            <input type="text" class="form-control form-control-lg" id="vendor_state" name="vendor_state" placeholder="ادخل اسم الولاية" value="{{$vendor['vendorPersonal']['state']}}"   aria-invalid="false"required >
+                                        </div>
+                                    </div>
+                                </div>
 
-                                
-                                <div class="row g-gs">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="vendor_name">اسم المستخدم  </label>
-                                            <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="vendor_name" name="vendor_name" placeholder="ادخل اسم المستخدم" value="{{$vendor->name}}" aria-invalid="false"required >
-                                                @error('vendor_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="vendor_address">العنوان </label>
-                                            <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="vendor_address" name="vendor_address"  placeholder="ادخل العنوان "  value="{{$vendor->address}}" aria-invalid="false"required >
-                                                @error('vendor_address')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="vendor_country">الدولة   </label>
-                                            <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="vendor_country" name="vendor_country" placeholder="ادخل  الدولة "   value="{{$vendor->country}}" aria-invalid="false"required >
-                                                @error('vendor_country')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="vendor_city">المدينة   </label>
-                                            <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="vendor_city" name="vendor_city" placeholder="ادخل اسم المدينة " value="{{$vendor->city}}"  aria-invalid="false"required >
-                                                @error('vendor_city')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="vendor_state">الولاية   </label>
-                                            <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="vendor_state" name="vendor_state" placeholder="ادخل اسم الولاية" value="{{$vendor->state}}"   aria-invalid="false"required >
-                                                @error('vendor_state')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="vendor_pincode">الرمز السري <span>  (pincode) </span>  </label>
-                                            <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="vendor_pincode" name="vendor_pincode" placeholder="ادخل الرمز السري "    value="{{$vendor->pincode}}" aria-invalid="false"required >
-                                                @error('vendor_pincode')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    
-
-                                    
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="vendor_mobile">رقم الهاتف</label>
-                                            <div class="form-control-wrap">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text" id="vendor_mobile">+966</span>
-                                                    </div>
-                                                    <input type="text" class="form-control form-control-lg" name="vendor_mobile" placeholder="ادخل رقم الهاتف " value="{{$vendor->mobile}}"  required minlength="9" maxlength="10">
-                                                </div>
-                                                @error('vendor_mobile')<div class="alert alert-danger">{{ $message }}</div> @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="default-06">الصورة الشخصية </label>
-                                            <div class="form-control-wrap">
-                                                <div class="form-file">
-                                                    <input type="file" multiple="" class="form-file-input" id="customFile">
-                                                    <label class="form-file-label" for="customFile"> اضغط لاختيار  صورة</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 ">
-                                        <div class="form-group">
-                                            <label class="form-label me-3 " for="site-off">الحالة </label>
-                                            <div class=" custom-control custom-switch ">
-                                                <input type="checkbox" class="custom-control-input" name="status" id="site-off"{{$vendor->status == '1' ? 'checked' : '' }}>
-                                                <label class="custom-control-label" for="site-off"><small>مفعل نعم / لا</small></label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-lg btn-primary float-end ">تعديل</button>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="vendor_pincode">الرمز السري <span>  (pincode) </span>  </label>
+                                        <div class="form-control-wrap">
+                                            <input type="text" class="form-control form-control-lg" id="vendor_pincode" name="vendor_pincode" placeholder="ادخل الرمز السري "    value="{{$vendor['vendorPersonal']['pincode']}}" aria-invalid="false"required >
                                         </div>
                                     </div>
                                 </div>
                                 
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="vendor_mobile">رقم الهاتف</label>
+                                        <div class="form-control-wrap">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="vendor_mobile">+966</span>
+                                                </div>
+                                                <input type="text" class="form-control form-control-lg" name="vendor_mobile" placeholder="ادخل رقم الهاتف " value="{{$vendor['vendorPersonal']['mobile']}}"  required minlength="9" maxlength="10">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 
-                            </form>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="default-06">الصورة الشخصية </label>
+                                        <div class="form-control-wrap">
+                                            <div class="form-file">
+                                                <input type="file" multiple="" class="form-file-input" id="customFile">
+                                                <label class="form-file-label" for="customFile"> اضغط لاختيار  صورة</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label class="form-label me-3 " for="site-off">الحالة </label>
+                                        <div class=" custom-control custom-switch ">
+                                            <input type="checkbox" class="custom-control-input" name="status" id="site-off"{{$vendor['vendorPersonal']['status'] == '1' ? 'checked' : '' }}>
+                                            <label class="custom-control-label" for="site-off"><small>مفعل نعم / لا</small></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-lg btn-primary float-end ">تعديل</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    @elseif($slug=="business")
-                    <div class="card">
+                    {{-- <div class="card">
                         <div class="card-inner">
                             <h6 class="title nk-block-title mb-4" style="color:#9d72ff"> تفاصيل المتجر :      </h6>
                             <form action="{{ url('admin/update-vendor-details/business') }}" class="form-validate is-alter" method="POST"
@@ -288,7 +268,6 @@
                         </div>
                     </div>
 
-                    @elseif($slug=="bank")
                     <div class="card">
                         <div class="card-inner">
                             <h6 class="title nk-block-title mb-4" style="color:#9d72ff"> التفاصيل المصرفية :      </h6>
@@ -346,8 +325,7 @@
                                 
                             </form>
                         </div>
-                    </div>
-                    @endif
+                    </div> --}}
                     
 
                    

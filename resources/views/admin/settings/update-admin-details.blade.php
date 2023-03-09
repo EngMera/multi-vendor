@@ -21,22 +21,10 @@
                             <h6 class="title nk-block-title" style="color:#9d72ff">تعديل التفاصيل   :  </h6>
                            
                            
-                            <form action="{{ url('admin/update-admin-details') }}" class="form-validate is-alter" method="POST"
-                                  name="updateAdminDetailsForm" id="updateAdminDetailsForm">
+                            <form action="{{ url('admin/update-admin-details') }}" class="form-validate is-alter" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row g-gs">
-                                    {{-- <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="default-06">الصورة الشخصية</label>
-                                            <div class="form-control-wrap">
-                                                <div class="form-file">
-                                                    <input type="file" multiple accept="image/*" class="form-file-input" id="customFile"data-show-caption="false" data-show-upload="false" data-fouc>
-                                                    <label class="form-file-label" for="customFile">اختر صورة</label>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
+                                
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="fva-full-name">اسم المستخدم  </label>

@@ -7,10 +7,13 @@ use App\Models\Admin;
 use App\Models\Vendor;
 use App\Models\VendorsBankDetail;
 use App\Models\VendorsBusinessDetail;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Image;
+use Symfony\Component\HttpFoundation\Session\Session as SessionSession;
 
 class AdminController extends Controller
 {
@@ -85,14 +88,38 @@ class AdminController extends Controller
             ];
             
             $this->validate($request, $rules , $customMessages);
+            
+            $admin = Admin::findOrFail(Auth::guard('admin')->user()->id);
 
-            Admin::where('id',Auth::guard('admin')->user()->id)->update([
-                'name'=> $data['name'],
-                'email'=> $data['email'],
-                // 'type'=> $data['type'],
-                'mobile'=> $data['mobile'],
-                'status'=> $request->status == true ?'1':'0',
-            ]);
+            // Upload Admin Image 
+            if ($request->hasFile('admin_image')) {
+                $uploadPath = 'uploads/photos/';
+                $path = 'uploads/photos/'.$admin->image;
+                if(File::exists($path)){
+                    File::delete($path);
+                }
+                $file = $request->file('admin_image');
+                $ext = $file->getClientOriginalExtension();
+                $filename = time().'.'.$ext;
+                $file->move('uploads/photos/', $filename);
+    
+                $admin->image =  $uploadPath.$filename;
+            }
+            elseif (!empty($data['current_admin_image'])) {
+                $filename = $data['current_admin_image'];
+            }
+            else
+            {
+                $filename = "";
+            }
+
+            $admin->name = $data['name'];
+            $admin->email = $data['email'];
+            $admin->type = $data['type'];
+            $admin->mobile = $data['mobile'];
+            $admin->status = $request->status == true ?'1':'0';
+            $admin->update();
+
             return redirect()->back()->with('success_message','تم التعديل بنجاح !');
 
         }
@@ -105,6 +132,8 @@ class AdminController extends Controller
         if ($slug == "personal")
         {
             $vendor =  Vendor::where('id',Auth::guard('admin')->user()->vendor_id)->first();
+            $vendorDetails = Admin::where('id',Auth::guard('admin')->user()->id)->first();
+
             if($request->isMethod('post'))
             {
                 $data = $request->all();
@@ -124,32 +153,46 @@ class AdminController extends Controller
                 ];
                 
                 $this->validate($request, $rules , $customMessages);
-                
-                
-                Admin::where('id',Auth::guard('admin')->user()->id)->update([
-                    'name'=> $data['vendor_name'],
-                    'mobile'=> $data['vendor_mobile'],
-                    'status'=> $request->status == true ?'1':'0',
-                ]);
 
-                Vendor::where('id',Auth::guard('admin')->user()->vendor_id)->update([
-                    'name'=> $data['vendor_name'],
-                    'address'=>$data['vendor_address'],
-                    'country'=>$data['vendor_country'],
-                    'city'=>$data['vendor_city'],
-                    'state'=>$data['vendor_state'],
-                    'pincode'=>$data['vendor_pincode'],
-                    'mobile'=> $data['vendor_mobile'],
-                    'status'=> $request->status == true ?'1':'0',
-                ]);
+                // Upload Admin Image 
+                if ($request->hasFile('vendor_image')) {
+                    $uploadPath = 'uploads/photos/';
+                    $path = 'uploads/photos/'.$vendorDetails->image;
+                    if(File::exists($path)){
+                        File::delete($path);
+                    }
+                    $file = $request->file('vendor_image');
+                    $ext = $file->getClientOriginalExtension();
+                    $filename = time().'.'.$ext;
+                    $file->move('uploads/photos/', $filename);
+        
+                    $vendorDetails->image =  $uploadPath.$filename;
+                }
+
+                $vendorDetails->name = $data['vendor_name'];
+                $vendorDetails->mobile = $data['vendor_mobile'];
+                $vendorDetails->status = $request->status == true ?'1':'0';
+                $vendorDetails->update();
+                
+                $vendor->name = $data['vendor_name'];
+                $vendor->address = $data['vendor_address'];
+                $vendor->country= $data['vendor_country'];
+                $vendor->city = $data['vendor_city'];
+                $vendor->state = $data['vendor_state'];
+                $vendor->pincode = $data['vendor_pincode'];
+                $vendor->mobile = $data['vendor_mobile'];
+                $vendor->status = $request->status == true ?'1':'0';
+                $vendor->update();
                 
                 return redirect()->back()->with('success_message','تم التعديل بنجاح !');
             }
-        return view('admin.settings.update-vendor-details',compact('slug','vendor'));
+        return view('admin.settings.update-vendor-details',compact('slug','vendor','vendorDetails'));
 
         }
         elseif ($slug == "business")
         {
+            $vendorBusiness =  VendorsBusinessDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->first();
+
             if($request->isMethod('post'))
             {
                 $data = $request->all();
@@ -175,20 +218,35 @@ class AdminController extends Controller
                     'shop_mobile.numeric'=> 'يجب  ادخال ارقام فقط',
                 ];
                 $this->validate($request, $rules , $customMessages);
-                $vendorBusiness =  VendorsBusinessDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->update([
-                    'shop_name'=> $request->shop_name,
-                    'shop_address'=>$data['shop_address'],
-                    'shop_city'=>$data['shop_city'],
-                    'shop_country'=>$data['shop_country'],
-                    'shop_state'=>$data['shop_state'],
-                    'shop_pincode'=>$data['shop_pincode'],
-                    'shop_mobile'=>$data['shop_mobile'],
-                    'shop_email'=>$data['shop_email'],
-                    // 'shop_website'=>$data['shop_website'],
-                    'address_proof'=>$data['address_proof'],
-                    'business_license_number'=>$request->business_license_number,
-                    'gst_number'=>$data['gst_number'],
-                ]);
+
+                // Upload shop Image 
+                if ($request->hasFile('address_proof_image')) {
+                    $uploadPath = 'uploads/photos/shops/';
+                    $path = 'uploads/photos/shops/'.$vendorBusiness->address_proof_image;
+                    if(File::exists($path)){
+                        File::delete($path);
+                    }
+                    $file = $request->file('address_proof_image');
+                    $ext = $file->getClientOriginalExtension();
+                    $filename = time().'.'.$ext;
+                    $file->move('uploads/photos/shops/', $filename);
+        
+                    $vendorBusiness->address_proof_image =  $uploadPath.$filename;
+                }
+                
+                $vendorBusiness->shop_name = $request->shop_name ;
+                $vendorBusiness->shop_address = $data['shop_address'];
+                $vendorBusiness->shop_city = $data['shop_city'];
+                $vendorBusiness->shop_country = $data['shop_country'] ;
+                $vendorBusiness->shop_state = $data['shop_state'];
+                $vendorBusiness->shop_pincode = $data['shop_pincode'];
+                $vendorBusiness->shop_mobile = $data['shop_mobile'];
+                $vendorBusiness->shop_email = $data['shop_email'];
+                $vendorBusiness->address_proof = $data['address_proof'];
+                $vendorBusiness->business_license_number = $request->business_license_number;
+                $vendorBusiness->gst_number = $data['gst_number'];
+                $vendorBusiness->update();
+
                 return redirect()->back()->with('success_message','تم التعديل بنجاح !');
                 
             }
@@ -275,10 +333,14 @@ class AdminController extends Controller
         {
             $admins = $admins->where('type',$type);
             $title = ucfirst($type);
+            // Session::put('page','view-'.strtolower($title));
         } 
         else
         {
-            $title = "Admin/Subadmins/Vendors";
+            $title = "Admins";
+            // $admins = Admin::all();
+            // Session::put('page','view-all');
+
         }
        
         $admins = $admins->get()->toArray();
@@ -288,10 +350,28 @@ class AdminController extends Controller
     public function viewVendorDetails($id)
     {
         $vendor = Admin::with('vendorPersonal','vendorBusiness','vendorBank')
-                               ->where('id',$id)->get();
-        // dd($vendors);
+                               ->where('id',$id)->first();
+        $vendor = json_decode(json_encode($vendor),true);
         return view('admin.admins.view-vendor-details',compact('vendor'));
     }
+
+    public function updateAdminStatus(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = $request->all();
+            if ($data['status']== 'Active')
+            {
+                $status = 0;
+            }
+            else
+            {
+                $status = 1;
+            }
+            Admin::where('id',$data['admin_id'])->update(['status'=>$status]);
+            return response()->json(['status'=>$status,'admin_id'=>$data['admin_id']]);
+        }
+    }
+
     public function logout()
     {
         Auth::guard('admin')->logout();

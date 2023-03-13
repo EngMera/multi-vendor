@@ -40,27 +40,31 @@
                                     <tbody>
                                         @foreach ($admins as $admin)
                                         <tr>
-                                            <th scope="row">{{$loop->iteration}}</th>
+                                            <th scope="row">{{$admin['id']}}</th>
                                             <td>{{$admin['name']}}</td>
                                             <td>{{$admin['type']}}</td>
                                             <td>{{$admin['email']}}</td>
                                             <td>{{$admin['mobile']}}</td>
                                             <td>
-                                                <img src="{{asset('admin/images/photos/'.$admin['image'])}}" alt="">
-                                                
+                                                <img src="{{asset($admin['image'])}}" style="height:35px;width:35px;border-radius:50%"alt="">
                                             </td>
                                             <td>
                                                 @if ($admin['status']==1)
-                                                 <em class="icon ni ni-check-fill-c text-success" style="font-size: 25px"></em>
-                                                    
+                                                <a href="javascript:void(0)" id="admin-{{$admin['id']}}"
+                                                   admin_id = {{ $admin['id'] }} class="updateAdminStatus">
+                                                   <em class="icon ni ni-check-fill-c text-success" status="Active" style="font-size: 25px"></em>
+                                                </a>
                                                 @else
-                                                 <em class="icon ni ni-cross-fill-c text-danger" style="font-size: 25px"></em>
+                                                <a href="javascript:void(0)" id="admin-{{$admin['id']}}"
+                                                   admin_id = {{ $admin['id'] }} class="updateAdminStatus">
+                                                   <em class="icon ni ni-cross-fill-c text-danger" Status="Inactive" style="font-size: 25px"></em>
+                                                </a>
                                                 @endif
                                             </td>
                                             <td>
                                                 @if ($admin['type']=='vendor')
                                                     <a href="{{url('admin/view-vendor-details/'.$admin['id'])}}">
-                                                       <span title="عرض التفاصيل "class=" " ><em class="icon ni ni-file-docs"style="font-size:25px"></em></span>
+                                                       <span title="عرض التفاصيل " ><em class="icon ni ni-file-docs"style="font-size:25px"></em></span>
                                                     </a>
                                                 @else
                                                     

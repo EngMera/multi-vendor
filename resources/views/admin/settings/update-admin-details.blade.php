@@ -24,12 +24,30 @@
                             <form action="{{ url('admin/update-admin-details') }}" class="form-validate is-alter" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row g-gs">
-                                
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="fva-full-name">اسم المستخدم  </label>
+                                            @if (!empty(Auth::guard('admin')->user()->image))
+                                               <img src="{{asset($admin->image)}}" style="height: 60px; width:60px; border-radius:50%" class="float-end" alt="image">
+                                               <input type="hidden" name="current_admin_image" value="{{$admin->image}}">
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="admin_image">الصورة الشخصية</label>
                                             <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="fva-full-name" name="name" value="{{$admin->name}}"  aria-invalid="false"required >
+                                                <div class="form-file">
+                                                    <input type="file"  accept="image/*" class="form-file-input" id="admin_image"data-show-caption="false" data-show-upload="false" data-fouc name="admin_image">
+                                                    <label class="form-file-label" for="admin_image">اختر صورة</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="name">اسم المستخدم  </label>
+                                            <div class="form-control-wrap">
+                                                <input type="text" class="form-control form-control-lg" id="name" name="name" value="{{$admin->name}}"  aria-invalid="false"required >
                                                 @error('name')<div class="alert alert-danger">{{ $message }}</div>@enderror
 
                                             </div>

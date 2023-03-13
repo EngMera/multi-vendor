@@ -96,7 +96,7 @@
                                 <a href="{{ url('admin/admins/vendor') }}" class="nk-menu-link"><span class="nk-menu-text"> البائعيين   </span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="{{ url('admin/admins/all') }}" class="nk-menu-link"><span class="nk-menu-text"> الجميع   </span></a>
+                                <a href="{{ url('admin/admins') }}" class="nk-menu-link"><span class="nk-menu-text"> الجميع   </span></a>
                             </li>
                         </ul>
                     </li>

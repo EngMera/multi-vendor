@@ -21,11 +21,27 @@
                         <div class="card-inner">
                             <h6 class="title nk-block-title mb-4" style="color:#9d72ff"> التفاصيل الشخصية :      </h6>
                             <form action="{{ url('admin/update-vendor-details/personal') }}" class="form-validate is-alter" method="POST"
-                                  name="updateAdminDetailsForm" id="updateAdminDetailsForm">
+                                  enctype="multipart/form-data">
                                 @csrf
-
-                                
                                 <div class="row g-gs">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            @if (!empty(Auth::guard('admin')->user()->image))
+                                               <img src="{{asset($vendorDetails->image)}}" style="height: 60px; width:60px; border-radius:50%"  alt="image">
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="vendor_image">الصورة الشخصية</label>
+                                            <div class="form-control-wrap">
+                                                <div class="form-file">
+                                                    <input type="file"  accept="image/*" class="form-file-input" id="vendor_image"data-show-caption="false" data-show-upload="false" data-fouc name="vendor_image">
+                                                    <label class="form-file-label" for="vendor_image">اختر صورة</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="vendor_name">اسم المستخدم  </label>
@@ -99,18 +115,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="default-06">الصورة الشخصية </label>
-                                            <div class="form-control-wrap">
-                                                <div class="form-file">
-                                                    <input type="file" multiple="" class="form-file-input" id="customFile">
-                                                    <label class="form-file-label" for="customFile"> اضغط لاختيار  صورة</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                  
 
                                     <div class="col-md-6 ">
                                         <div class="form-group">
@@ -138,11 +143,30 @@
                         <div class="card-inner">
                             <h6 class="title nk-block-title mb-4" style="color:#9d72ff"> تفاصيل المتجر :      </h6>
                             <form action="{{ url('admin/update-vendor-details/business') }}" class="form-validate is-alter" method="POST"
-                                  name="updateAdminDetailsForm" id="updateAdminDetailsForm">
+                                  enctype="multipart/form-data">
                                 @csrf
 
                                 
                                 <div class="row g-gs">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            @if (!empty($vendorBusiness->address_proof_image))
+                                               <img src="{{asset($vendorBusiness->address_proof_image)}}" style="height: 60px; width:60px; border-radius:50%"  alt="image">
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="address_proof_image">صورة المتجر  </label>
+                                            <div class="form-control-wrap">
+                                                <div class="form-file">
+                                                    <input type="file"   name="address_proof_image" class="form-file-input" id="address_proof_image">
+                                                    <label class="form-file-label" for="customFile"> اضغط لاختيار  صورة</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="shop_name">اسم المتجر   </label>
@@ -262,19 +286,8 @@
                                         </div>
                                     </div>
 
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="address_proof_image">الصورة الشخصية </label>
-                                            <div class="form-control-wrap">
-                                                <div class="form-file">
-                                                    <input type="file" multiple="" name="address_proof_image" class="form-file-input" id="address_proof_image">
-                                                    <label class="form-file-label" for="customFile"> اضغط لاختيار  صورة</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                    
+                                    
                                    
                                     <div class="col-md-12">
                                         <div class="form-group">

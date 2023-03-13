@@ -35,10 +35,10 @@
                                         <div class="form-group">
                                             <label class="form-label" for="vendor_image">الصورة الشخصية</label>
                                             <div class="form-control-wrap">
-                                                <div class="form-file">
-                                                    <input type="file"  accept="image/*" class="form-file-input" id="vendor_image"data-show-caption="false" data-show-upload="false" data-fouc name="vendor_image">
+                                                <div class="form-file ">
+                                                    <input type="file"  accept="image/*" class="form-file-input  " id="vendor_image"data-show-caption="false" data-show-upload="false" data-fouc name="vendor_image">
                                                     <label class="form-file-label" for="vendor_image">اختر صورة</label>
-                                                </div>
+                                                </div> 
                                             </div>
                                         </div>
                                     </div>
@@ -46,7 +46,7 @@
                                         <div class="form-group">
                                             <label class="form-label" for="vendor_name">اسم المستخدم  </label>
                                             <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="vendor_name" name="vendor_name" placeholder="ادخل اسم المستخدم" value="{{$vendor->name}}" aria-invalid="false"required >
+                                                <input type="text" class="form-control " id="vendor_name" name="vendor_name" placeholder="ادخل اسم المستخدم" value="{{$vendor->name}}" aria-invalid="false"required >
                                                 @error('vendor_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             </div>
                                         </div>
@@ -55,7 +55,7 @@
                                         <div class="form-group">
                                             <label class="form-label" for="vendor_address">العنوان </label>
                                             <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="vendor_address" name="vendor_address"  placeholder="ادخل العنوان "  value="{{$vendor->address}}" aria-invalid="false"required >
+                                                <input type="text" class="form-control " id="vendor_address" name="vendor_address"  placeholder="ادخل العنوان "  value="{{$vendor->address}}" aria-invalid="false"required >
                                                 @error('vendor_address')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             </div>
                                         </div>
@@ -63,9 +63,16 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="vendor_country">الدولة   </label>
-                                            <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="vendor_country" name="vendor_country" placeholder="ادخل  الدولة "   value="{{$vendor->country}}" aria-invalid="false"required >
-                                                @error('vendor_country')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                                {{-- <input type="text" class="form-control " id="vendor_country" name="vendor_country" placeholder="ادخل  الدولة "   value="{{$vendor->country}}" aria-invalid="false"required > --}}
+                                            <div class="form-control-wrap ">
+                                                <div class="form-control-select">
+                                                    <select class="form-control  " id="vendor_country" name="vendor_country">
+                                                        <option value="">-- اختار من القائمة -- </option>
+                                                        @foreach ($countries as $country)
+                                                            <option value="{{$country->country_name}}" {{$country->country_name == $vendor->country ? 'selected' : ''}}>{{$country->country_name}} </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -73,7 +80,7 @@
                                         <div class="form-group">
                                             <label class="form-label" for="vendor_city">المدينة   </label>
                                             <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="vendor_city" name="vendor_city" placeholder="ادخل اسم المدينة " value="{{$vendor->city}}"  aria-invalid="false"required >
+                                                <input type="text" class="form-control " id="vendor_city" name="vendor_city" placeholder="ادخل اسم المدينة " value="{{$vendor->city}}"  aria-invalid="false"required >
                                                 @error('vendor_city')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             </div>
                                         </div>
@@ -82,7 +89,7 @@
                                         <div class="form-group">
                                             <label class="form-label" for="vendor_state">الولاية   </label>
                                             <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="vendor_state" name="vendor_state" placeholder="ادخل اسم الولاية" value="{{$vendor->state}}"   aria-invalid="false"required >
+                                                <input type="text" class="form-control " id="vendor_state" name="vendor_state" placeholder="ادخل اسم الولاية" value="{{$vendor->state}}"   aria-invalid="false"required >
                                                 @error('vendor_state')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             </div>
                                         </div>
@@ -92,7 +99,7 @@
                                         <div class="form-group">
                                             <label class="form-label" for="vendor_pincode">الرمز السري <span>  (pincode) </span>  </label>
                                             <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="vendor_pincode" name="vendor_pincode" placeholder="ادخل الرمز السري "    value="{{$vendor->pincode}}" aria-invalid="false"required >
+                                                <input type="text" class="form-control " id="vendor_pincode" name="vendor_pincode" placeholder="ادخل الرمز السري "    value="{{$vendor->pincode}}" aria-invalid="false"required >
                                                 @error('vendor_pincode')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             </div>
                                         </div>
@@ -109,7 +116,7 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="vendor_mobile">+966</span>
                                                     </div>
-                                                    <input type="text" class="form-control form-control-lg" name="vendor_mobile" placeholder="ادخل رقم الهاتف " value="{{$vendor->mobile}}"  required minlength="9" maxlength="10">
+                                                    <input type="text" class="form-control " name="vendor_mobile" placeholder="ادخل رقم الهاتف " value="{{$vendor->mobile}}"  required minlength="9" maxlength="10">
                                                 </div>
                                                 @error('vendor_mobile')<div class="alert alert-danger">{{ $message }}</div> @enderror
                                             </div>
@@ -128,7 +135,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-lg btn-primary float-end ">تعديل</button>
+                                            <button type="submit" class="btn  btn-primary float-end ">تعديل</button>
                                         </div>
                                     </div>
                                 </div>
@@ -171,7 +178,7 @@
                                         <div class="form-group">
                                             <label class="form-label" for="shop_name">اسم المتجر   </label>
                                             <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="shop_name" name="shop_name"  value="{{$vendorBusiness->shop_name}}" placeholder="ادخل اسم المتجر"  aria-invalid="false"required >
+                                                <input type="text" class="form-control " id="shop_name" name="shop_name"  value="{{$vendorBusiness->shop_name}}" placeholder="ادخل اسم المتجر"  aria-invalid="false"required >
                                                 @error('shop_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             </div>
                                         </div>
@@ -180,34 +187,44 @@
                                         <div class="form-group">
                                             <label class="form-label" for="shop_address">العنوان </label>
                                             <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="shop_address" name="shop_address" value="{{$vendorBusiness->shop_address}}" placeholder="ادخل العنوان "  aria-invalid="false"required >
+                                                <input type="text" class="form-control " id="shop_address" name="shop_address" value="{{$vendorBusiness->shop_address}}" placeholder="ادخل العنوان "  aria-invalid="false"required >
                                                 @error('shop_address')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="shop_city">الدولة   </label>
+                                            <label class="form-label" for="shop_country">  الدولة </label>
                                             <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="shop_city" name="shop_city" placeholder="ادخل  الدولة " value="{{$vendorBusiness->shop_city}}"  value="" aria-invalid="false"required >
-                                                @error('shop_city')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="shop_country">المدينة   </label>
-                                            <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="shop_country" name="shop_country" placeholder="ادخل اسم المدينة " value="{{$vendorBusiness->shop_country}}"  aria-invalid="false"required >
+                                                {{-- <input type="text" class="form-control " id="shop_country" name="shop_country" placeholder="ادخل اسم المدينة " value="{{$vendorBusiness->shop_country}}"  aria-invalid="false"required > --}}
+                                                <div class="form-control-wrap ">
+                                                    <div class="form-control-select">
+                                                        <select class="form-control  " id="shop_country" name="shop_country">
+                                                            <option value="">-- اختار من القائمة -- </option>
+                                                            @foreach ($countries as $country)
+                                                                <option value="{{$country->country_name}}" {{$country->country_name == $vendorBusiness->shop_country ? 'selected' : ''}}>{{$country->country_name}} </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
                                                 @error('shop_country')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            <label class="form-label" for="shop_city">  المدينة </label>
+                                            <div class="form-control-wrap">
+                                                <input type="text" class="form-control " id="shop_city" name="shop_city" placeholder="ادخل  الدولة " value="{{$vendorBusiness->shop_city}}"  value="" aria-invalid="false"required >
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-md-6">
+                                        <div class="form-group">
                                             <label class="form-label" for="shop_state">الولاية   </label>
                                             <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="shop_state" name="shop_state" placeholder="ادخل اسم الولاية" value="{{$vendorBusiness->shop_state}}"   aria-invalid="false"required >
+                                                <input type="text" class="form-control " id="shop_state" name="shop_state" placeholder="ادخل اسم الولاية" value="{{$vendorBusiness->shop_state}}"   aria-invalid="false"required >
                                                 @error('shop_state')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             </div>
                                         </div>
@@ -217,7 +234,7 @@
                                         <div class="form-group">
                                             <label class="form-label" for="shop_pincode">الرمز السري <span>  (pincode) </span>  </label>
                                             <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="shop_pincode" name="shop_pincode" placeholder="ادخل الرمز السري "    value="{{$vendorBusiness->shop_pincode}}" aria-invalid="false"required >
+                                                <input type="text" class="form-control " id="shop_pincode" name="shop_pincode" placeholder="ادخل الرمز السري "    value="{{$vendorBusiness->shop_pincode}}" aria-invalid="false"required >
                                                 @error('shop_pincode')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             </div>
                                         </div>
@@ -234,7 +251,7 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="shop_mobile">+966</span>
                                                     </div>
-                                                    <input type="text" class="form-control form-control-lg" name="shop_mobile" placeholder="ادخل رقم الهاتف " value="{{$vendorBusiness->shop_mobile}}"  required minlength="9" maxlength="10">
+                                                    <input type="text" class="form-control " name="shop_mobile" placeholder="ادخل رقم الهاتف " value="{{$vendorBusiness->shop_mobile}}"  required minlength="9" maxlength="10">
                                                 </div>
                                                 @error('shop_mobile')<div class="alert alert-danger">{{ $message }}</div> @enderror
                                             </div>
@@ -245,7 +262,7 @@
                                         <div class="form-group">
                                             <label class="form-label" for="shop_email">البريد الالكتروني  </label>
                                             <div class="form-control-wrap">
-                                                <input type="email" class="form-control form-control-lg" id="shop_email" name="shop_email" placeholder="ادخل البريد الالكتروني  "    value="{{$vendorBusiness->shop_email}}" aria-invalid="false"required >
+                                                <input type="email" class="form-control " id="shop_email" name="shop_email" placeholder="ادخل البريد الالكتروني  "    value="{{$vendorBusiness->shop_email}}" aria-invalid="false"required >
                                                 @error('shop_email')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             </div>
                                         </div>
@@ -270,7 +287,7 @@
                                         <div class="form-group">
                                             <label class="form-label" for="business_license_number">رقم الرخصة التجارية </label>
                                             <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="business_license_number" name="business_license_number" placeholder="ادخل رقم الرخصة التجارية  "   value="{{$vendorBusiness->business_license_number}}" aria-invalid="false"required >
+                                                <input type="text" class="form-control " id="business_license_number" name="business_license_number" placeholder="ادخل رقم الرخصة التجارية  "   value="{{$vendorBusiness->business_license_number}}" aria-invalid="false"required >
                                                 @error('business_license_number')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             </div>
                                         </div>
@@ -280,7 +297,7 @@
                                         <div class="form-group">
                                             <label class="form-label" for="gst_number">الرقم الضريبي  <span>  (gst_number) </span>  </label>
                                             <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="gst_number" name="gst_number" placeholder="ادخل الرقم الضريبي  "    value="{{$vendorBusiness->gst_number}}" aria-invalid="false"required >
+                                                <input type="text" class="form-control " id="gst_number" name="gst_number" placeholder="ادخل الرقم الضريبي  "    value="{{$vendorBusiness->gst_number}}" aria-invalid="false"required >
                                                 @error('gst_number')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                             </div>
                                         </div>
@@ -291,7 +308,7 @@
                                    
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-lg btn-primary float-end ">تعديل</button>
+                                            <button type="submit" class="btn  btn-primary float-end ">تعديل</button>
                                         </div>
                                     </div>
                                 </div>
@@ -315,7 +332,7 @@
                                         <div class="form-group">
                                             <label class="form-label" for="account_holder_name">اسم صاحب الحساب   </label>
                                             <div class="form-control-wrap">
-                                                <input type="text" class="form-control form-control-lg" id="account_holder_name" value="{{$vendorBank->account_holder_name}}" placeholder="ادخل اسم صاحب الحساب هنا " name="account_holder_name"  aria-invalid="false"required >
+                                                <input type="text" class="form-control " id="account_holder_name" value="{{$vendorBank->account_holder_name}}" placeholder="ادخل اسم صاحب الحساب هنا " name="account_holder_name"  aria-invalid="false"required >
                                                 @error('account_holder_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
 
                                             </div>
@@ -327,15 +344,12 @@
                                             <div class="form-control-wrap">
                                                 <div class="form-icon form-icon-right">
                                                 </div>
-                                                <input type="text" class="form-control form-control-lg" id="bank_name" value="{{$vendorBank->bank_name}}" placeholder="ادخل اسم البنك هنا " name="bank_name" required>
+                                                <input type="text" class="form-control " id="bank_name" value="{{$vendorBank->bank_name}}" placeholder="ادخل اسم البنك هنا " name="bank_name" required>
                                                 @error('bank_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
 
                                             </div>
                                         </div>
                                     </div>
-                                  
-
-                                    
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="account_number">رقم الحساب</label>
@@ -351,7 +365,7 @@
                                     
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-lg btn-primary float-end ">تعديل</button>
+                                            <button type="submit" class="btn  btn-primary float-end ">تعديل</button>
                                         </div>
                                     </div>
                                 </div>

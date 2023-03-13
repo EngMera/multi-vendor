@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\Country;
 use App\Models\Vendor;
 use App\Models\VendorsBankDetail;
 use App\Models\VendorsBusinessDetail;
@@ -20,6 +21,38 @@ class AdminController extends Controller
     public function dashboard()
     {
         return view('admin.pages.dashboard');
+    }
+    public function login(Request $request)
+    {
+        if ($request->isMethod('post')) 
+        {
+            $data = $request->all();
+
+            $rules = [
+                'email' => 'required|email|max:255',
+                'password' => 'required',
+            ];
+
+            $customMessages = [
+                'email.required'=> 'يجب اضافة  عنوان البريد الالكتروني',
+                'email.email'=>'يجب ان يكون عنوان البريد الالكتروني متوفر',
+                'email.max'=>'يجب الا يزيد البريد عن 255',
+                'password.required'=>'يجب اضافة كلمة السر',
+            ];
+            
+            $this->validate($request, $rules , $customMessages);
+
+            if (Auth::guard('admin')->attempt(['email'=>$data['email'],'password'=>$data['password'],
+                                              'status'=>1])) 
+            {
+                return redirect('admin/dashboard');
+            }
+            else 
+            {
+                return redirect()->back()->with('message','البريد الالكتروني او الباسورد غير متوفر');
+            }
+        }
+         return view('admin.auth.login');
     }
     public function updateAdminPassword(Request $request)
     {
@@ -186,7 +219,9 @@ class AdminController extends Controller
                 
                 return redirect()->back()->with('success_message','تم التعديل بنجاح !');
             }
-        return view('admin.settings.update-vendor-details',compact('slug','vendor','vendorDetails'));
+          $countries = Country::where('status',1)->get();
+
+          return view('admin.settings.update-vendor-details',compact('slug','vendor','vendorDetails','countries'));
 
         }
         elseif ($slug == "business")
@@ -250,8 +285,9 @@ class AdminController extends Controller
                 return redirect()->back()->with('success_message','تم التعديل بنجاح !');
                 
             }
-            $vendorBusiness =  VendorsBusinessDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->first();
-            return view('admin.settings.update-vendor-details',compact('slug','vendorBusiness'));
+            $countries = Country::where('status',1)->get();
+            // $vendorBusiness =  VendorsBusinessDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->first();
+            return view('admin.settings.update-vendor-details',compact('slug','vendorBusiness','countries'));
 
 
         }
@@ -291,40 +327,11 @@ class AdminController extends Controller
 
 
         }
+        $countries = Country::where('status',1)->get();
+        return view('admin.settings.update-vendor-details',compact('slug','vendorDetails','countries'));
 
     }
-    public function login(Request $request)
-    {
-        if ($request->isMethod('post')) 
-        {
-            $data = $request->all();
-
-            $rules = [
-                'email' => 'required|email|max:255',
-                'password' => 'required',
-            ];
-
-            $customMessages = [
-                'email.required'=> 'يجب اضافة  عنوان البريد الالكتروني',
-                'email.email'=>'يجب ان يكون عنوان البريد الالكتروني متوفر',
-                'email.max'=>'يجب الا يزيد البريد عن 255',
-                'password.required'=>'يجب اضافة كلمة السر',
-            ];
-            
-            $this->validate($request, $rules , $customMessages);
-
-            if (Auth::guard('admin')->attempt(['email'=>$data['email'],'password'=>$data['password'],
-                                              'status'=>1])) 
-            {
-                return redirect('admin/dashboard');
-            }
-            else 
-            {
-                return redirect()->back()->with('message','البريد الالكتروني او الباسورد غير متوفر');
-            }
-        }
-         return view('admin.auth.login');
-    }
+   
 
     public function admins($type=null)
     {

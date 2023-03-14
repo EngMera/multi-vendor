@@ -93,18 +93,50 @@ $(document).ready(function(){
         })
     });
 
-    // Confirm Delete
-    $(".confirmDelete").click(function(){
-        var title = $(this).attr("title");
-        if(confirm("هل انت متأكد من حذف هذة البيانات؟ "))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+    // Update Category Status
+    $(document).on("click",".updateCategoryStatus",function () {
+      
+        var status  = $(this).children("em").attr("status");
+        var category_id = $(this).attr("category_id");
+        // alert(admin_id);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'post',
+            url: '/admin/update-category-status',
+            data: {
+                status:status,
+                category_id:category_id
+            },
+            success:function(resp){
+                if (resp['status']== 0) 
+                {
+                    $("#category-"+category_id).html("<em class='icon ni ni-cross-fill-c text-danger' status='Inactive' style='font-size: 25px'></em>");
+                }
+                else if (resp['status']== 1) 
+                {
+                    $("#category-"+category_id).html("<em class='icon ni ni-check-fill-c text-success' status='Active' style='font-size: 25px'></em>");
+                }
+                // alert(resp);
+            },
+            error:function(){
+                alert("Error");
+            }
+        })
     });
+    // Confirm Delete
+    // $(".confirmDelete").click(function(){
+    //     var title = $(this).attr("title");
+    //     if(confirm("هل انت متأكد من حذف هذة البيانات؟ "))
+    //     {
+    //         return true;
+    //     }
+    //     else
+    //     {
+    //         return false;
+    //     }
+    // });
 
 
 });

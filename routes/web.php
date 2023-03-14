@@ -58,12 +58,14 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
 
          // Sections
          Route::get('sections','SectionController@sections');
-         //  Update Section Status
-         Route::post('update-section-status','SectionController@updateSectionStatus');
-         Route::get('sections/{id}/edit','SectionController@edit');
+         Route::post('update-section-status','SectionController@updateSectionStatus'); //  Update Section Status
          Route::get('sections/{id}/delete','SectionController@delete');
          Route::match(['get','post'],'add-edit-section/{id?}', 'SectionController@addEditSection');
          
+         // Categories  
+         Route::get('categories','CategoryController@categories');
+         Route::post('update-category-status','CategoryController@updateCategoryStatus');//  Update Category Status
+         Route::get('categories/{id}/delete','CategoryController@delete');
 
          //admin logout
          Route::get('logout','AdminController@logout');

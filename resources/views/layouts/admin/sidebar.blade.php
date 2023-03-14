@@ -67,7 +67,7 @@
                     @else
                     <li class="nk-menu-item has-sub">
                         <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-icon"><em class="icon ni ni-package-fill"></em></span>
+                            <span class="nk-menu-icon"><em class="icon ni ni-setting-fill"></em></span>
                             <span class="nk-menu-text">الاعدادات</span>
                         </a>
                         <ul class="nk-menu-sub">
@@ -82,7 +82,7 @@
                     </li>
                     <li class="nk-menu-item has-sub">
                         <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-icon"><em class="icon ni ni-package-fill"></em></span>
+                            <span class="nk-menu-icon"><em class="icon ni ni-account-setting-fill"></em></span>
                             <span class="nk-menu-text"> إدارة المشرف</span>
                         </a>
                         <ul class="nk-menu-sub">
@@ -102,7 +102,7 @@
                     </li>
                     <li class="nk-menu-item has-sub">
                         <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-icon"><em class="icon ni ni-package-fill"></em></span>
+                            <span class="nk-menu-icon"><em class="icon ni ni-users-fill"></em></span>
                             <span class="nk-menu-text"> إدارة المستخدميين</span>
                         </a>
                         <ul class="nk-menu-sub">
@@ -118,6 +118,26 @@
                     
                     <!-- الاعدادات-->
 
+                    
+                    <!-- كتالوج-->
+                    <li class="nk-menu-item has-sub">
+                        <a href="#" class="nk-menu-link nk-menu-toggle">
+                            <span class="nk-menu-icon"><em class="icon ni ni-layers-fill"></em></span>
+                            <span class="nk-menu-text">كتالوج</span>
+                        </a>
+                        <ul class="nk-menu-sub">
+                            <li class="nk-menu-item">
+                                <a href="{{url('admin/sections')}}" class="nk-menu-link"><span class="nk-menu-text">الأقسام </span></a>
+                            </li>
+                            <li class="nk-menu-item">
+                                <a href="{{url('admin/categories')}}" class="nk-menu-link"><span class="nk-menu-text">التصنيفات </span></a>
+                            </li>
+                            <li class="nk-menu-item">
+                                <a href="{{url('admin/products')}}" class="nk-menu-link"><span class="nk-menu-text">المنتجات </span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- كتالوج-->
                     <!-- المتجر -->
                     <li class="nk-menu-heading">
                         <h6 class="overline-title text-primary-alt">المتجر</h6>

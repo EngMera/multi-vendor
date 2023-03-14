@@ -19,7 +19,7 @@ class AdminTableSeeder extends Seeder
     {
         DB::table('admins')->truncate();
 
-        $admin =  [
+        $admins =  [
             [
             'id'=>1,
             'name'=>'EngMera',
@@ -47,7 +47,10 @@ class AdminTableSeeder extends Seeder
 
        
 
-        Admin::insert($admin);
+        foreach ( $admins as $admin) {
+           Admin::create($admin);
+            
+        }
       
     }
 }

@@ -5,9 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Country extends Model
+class Section extends Model
 {
     use HasFactory;
-    protected $table = 'countries';
-    protected $guarded = [];
+    protected $table = 'sections';
+    protected $fillable = [
+        'name',
+        'status'
+    ];
 }

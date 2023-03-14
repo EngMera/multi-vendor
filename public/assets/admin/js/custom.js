@@ -60,4 +60,51 @@ $(document).ready(function(){
         })
     });
 
+    // Update Section Status
+    $(document).on("click",".updateSectionStatus",function () {
+      
+        var status  = $(this).children("em").attr("status");
+        var section_id = $(this).attr("section_id");
+        // alert(admin_id);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'post',
+            url: '/admin/update-section-status',
+            data: {
+                status:status,
+                section_id:section_id
+            },
+            success:function(resp){
+                if (resp['status']== 0) 
+                {
+                    $("#section-"+section_id).html("<em class='icon ni ni-cross-fill-c text-danger' status='Inactive' style='font-size: 25px'></em>");
+                }
+                else if (resp['status']== 1) 
+                {
+                    $("#section-"+section_id).html("<em class='icon ni ni-check-fill-c text-success' status='Active' style='font-size: 25px'></em>");
+                }
+                // alert(resp);
+            },
+            error:function(){
+                alert("Error");
+            }
+        })
+    });
+
+    // Confirm Delete
+    $(".confirmDelete").click(function(){
+        var title = $(this).attr("title");
+        if(confirm("هل انت متأكد من حذف هذة البيانات؟ "))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    });
+
+
 });

@@ -23,4 +23,12 @@ class Category extends Model
         'meta_keyword',
         'status',
     ];
+    public function section()
+    {
+        return $this->belongsTo(Section::class,'section_id')->select('id','name');
+    }
+    public function parentcategory()
+    {
+        return $this->belongsTo(Category::class,'parent_id')->select('id','category_name');
+    }
 }

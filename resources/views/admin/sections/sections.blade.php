@@ -17,7 +17,10 @@
 
                                 <div id="DataTables_Table_0_wrapper"class="dataTables_wrapper dt-bootstrap4 no-footer">
 
-                                    <a href="{{url('admin/add-edit-section')}}" class="btn btn-primary mb-2">أضافة قسم جديد</a>
+                                    <div class="d-flex justify-between mb-3">
+                                        <h5 class="text-primary"><em class="icon ni ni-view-x2 px-2"></em>قائمة الأقسام</h5>
+                                        <a href="{{url('admin/add-edit-section')}}" class="btn btn-primary mb-2">أضافة قسم جديد</a>
+                                    </div>
 
                                     {{-- table data --}}
                                     <table class="table table-striped datatable-init table dataTable">

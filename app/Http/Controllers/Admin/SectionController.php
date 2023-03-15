@@ -46,8 +46,6 @@ class SectionController extends Controller
                 $section = Section::findOrFail($id);
                 $success_message = "تم تعديل القسم بنجاح";
                 $send = "تعديل";
-    
-    
             }
             if($request->isMethod('post'))
             {

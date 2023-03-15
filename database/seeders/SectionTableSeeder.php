@@ -18,11 +18,11 @@ class SectionTableSeeder extends Seeder
     {
         DB::table('sections')->delete();
         $sections = [
-            ['name'=>'Clothes',
+            ['name'=>'ملابس',
             'status'=>1],
-            ['name'=>'Electronics',
+            ['name'=>'الكترونيات',
             'status'=>1],
-            ['name'=>'Appliances',
+            ['name'=>'أجهزة ',
             'status'=>1],
         ];
         foreach ($sections  as $section) {

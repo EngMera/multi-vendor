@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 @section('title')
- الأقسام
+ التصنيفات
 @endsection
 
 @section('style')
@@ -16,40 +16,54 @@
                             <div class="card-inner">
 
                                 <div id="DataTables_Table_0_wrapper"class="dataTables_wrapper dt-bootstrap4 no-footer">
-
-                                    <a href="{{url('admin/add-edit-section')}}" class="btn btn-primary mb-2">أضافة تصنيف جديد</a>
-
+                                    <div class="d-flex justify-between mb-3">
+                                        <h5 class="text-primary"><em class="icon ni ni-list-thumb-alt-fill px-2"></em>قائمة التصنيفات</h5>
+                                        <a href="{{url('admin/add-edit-category')}}" class="btn btn-primary ">أضافة تصنيف جديد</a>
+                                    </div>
                                     {{-- table data --}}
                                     <table class="table table-striped datatable-init table dataTable">
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">الاسم</th>
+                                                <th scope="col">الصورة</th>
                                                 <th scope="col">الحالة</th>
-                                                
+                                                <th scope="col">القسم</th>
+                                                <th scope="col">التصنيف الاب</th>
+                                                <th scope="col"> URL</th>
                                                 <th scope="col">العمليات  </th>
 
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($categories as $category)
+                                              @if(isset($category['parentcategory']['category_name'])&&!empty($category['parentcategory']['category_name']))
+                                                @php $parent_category = $category['parentcategory']['category_name']; @endphp
+                                              @else
+                                                 @php $parent_category = "المصدر"; @endphp
+                                              @endif
                                             <tr>
                                                 <th scope="row">{{$loop->iteration}}</th>
                                                 <td>{{$category['category_name']}}</td>
-                                            
                                                 <td>
-                                                @if ($category['status'] == 1)
-                                                <a href="javascript:void(0)" id="category-{{$category['id']}}"
-                                                    category_id = {{ $category['id'] }} class="updateCategoryStatus">
-                                                    <em class="icon ni ni-check-fill-c text-success" status="Active" style="font-size: 25px"></em>
-                                                    </a>
-                                                    @else
-                                                    <a href="javascript:void(0)" id="category-{{$category['id']}}"
-                                                    category_id = {{ $category['id'] }} class="updateCategoryStatus">
-                                                    <em class="icon ni ni-cross-fill-c text-danger" Status="Inactive" style="font-size: 25px"></em>
-                                                    </a>
-                                                @endif
+                                                    <img src="{{asset($category['category_image'])}}"  style="height:40px; width:40px; border-radius:50%"alt="">
                                                 </td>
+                                                <td>
+                                                    @if ($category['status'] == 1)
+                                                    <a href="javascript:void(0)" id="category-{{$category['id']}}"
+                                                        category_id = {{ $category['id'] }} class="updateCategoryStatus">
+                                                        <em class="icon ni ni-check-fill-c text-success" status="Active" style="font-size: 25px"></em>
+                                                        </a>
+                                                        @else
+                                                        <a href="javascript:void(0)" id="category-{{$category['id']}}"
+                                                        category_id = {{ $category['id'] }} class="updateCategoryStatus">
+                                                        <em class="icon ni ni-cross-fill-c text-danger" Status="Inactive" style="font-size: 25px"></em>
+                                                        </a>
+                                                    @endif
+                                                </td>
+                                                <td>{{$category['section']['name']}}</td>
+                                                <td>{{$parent_category}}</td>
+                                                <td>{{$category['url']}}</td>
                                                 <td>
                                                         <a href="{{url('admin/add-edit-category/'.$category['id'])}}">
                                                             <button type="button" class="btn btn-sm" style="background-color: none; outline:none" >

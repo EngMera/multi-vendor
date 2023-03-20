@@ -46,7 +46,7 @@
                                                 <th scope="row">{{$loop->iteration}}</th>
                                                 <td>{{$category['category_name']}}</td>
                                                 <td>
-                                                    <img src="{{asset($category['category_image'])}}"  style="height:40px; width:40px; border-radius:50%"alt="">
+                                                    <img src="{{asset($category['category_image'])}}"  style="height:40px; width:40px; border-radius:50%; object-fit:cover"alt="">
                                                 </td>
                                                 <td>
                                                     @if ($category['status'] == 1)

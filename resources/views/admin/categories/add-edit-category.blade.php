@@ -16,7 +16,7 @@
                             <div class="card-inner">
                                 <h6 class="title nk-block-title" style="color:#9d72ff">  {{$title}}  </h6>
                                <div class="row">
-                                    <form @if (empty($category['name']))
+                                    <form @if (empty($category['id']))
                                           action="{{ url('admin/add-edit-category') }}"
                                           @else
                                           action="{{ url('admin/add-edit-category/'.$category['id']) }}"
@@ -24,15 +24,19 @@
                                           class="form-validate is-alter mt-5 " method="post"  enctype="multipart/form-data">
                                         @csrf
                                         <div class="row g-gs">
-                                           
+                                            <div class="col-md-12">
+                                                <div class="">
+                                                    <img src="{{asset($category['category_image'])}}"  style="height:100px; width:100px; border-radius:5%;object-fit:cover"alt="">
+                                                </div>
+                                            </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label" for="category_name">اسم التصنيف   </label>
                                                     <div class="form-control-wrap">
                                                         <input type="text" class="form-control " id="category_name" name="category_name" 
-                                                        @if (empty($category['name']))
+                                                        @if (empty($category['category_name']))
                                                         placeholder = "ادخل اسم التصنيف"
-                                                        value="{{old('category_name')}}"@else value="{{$category['name']}}"@endif  aria-invalid="false" >
+                                                        value="{{old('category_name')}}"@else value="{{$category['category_name']}}"@endif  aria-invalid="false" >
                                                         @error('category_name')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                                     </div>
                                                 </div>
@@ -44,25 +48,16 @@
                                                         <select class="form-select form-control form-control-lg valid" id="section_id" name="section_id" data-placeholder="Select a option" aria-invalid="false">
                                                             <option value="" selected="">-- اختار من القائمة -- </option>
                                                             @foreach ($sections as $section)
-                                                                <option value="{{$section['id']}}">{{$section['name']}}</option>
+                                                                <option value="{{$section['id']}}" @if (!empty($category['section_id']) && $category['section_id']==$section['id']) selected="" @endif>{{$section['name']}}</option>
                                                             @endforeach
                                                         </select>
                                                         @error('section_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
-
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="form-label" for="parent_id">  التصنيف الاب</label>
-                                                    <div class="form-control-wrap ">
-                                                        <select class="form-select form-control form-control-lg valid" id="parent_id" name="parent_id" data-placeholder="Select a option" aria-invalid="false">
-                                                            <option value="0" selected="">-- التصنيف الرئيسي   -- </option>
-                                                            
-                                                        </select>
-                                                        @error('parent_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
-
-                                                    </div>
+                                                <div id="appendCategoriesLevel">
+                                                    @include('admin.categories.append_categories_level')
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -84,7 +79,7 @@
                                                         <input type="number" class="form-control " id="category_discount" name="category_discount" 
                                                         @if (empty($category['category_discount']))
                                                         placeholder = "ادخل خصم التصنيف "
-                                                        value="{{old('category_discount')}}"@else value="{{$category['category_discont']}}"@endif  aria-invalid="false" >
+                                                        value="{{old('category_discount')}}"@else value="{{$category['category_discount']}}"@endif  aria-invalid="false" >
                                                         @error('category_discount')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                                     </div>
                                                 </div>

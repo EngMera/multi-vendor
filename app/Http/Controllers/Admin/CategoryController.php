@@ -37,6 +37,7 @@ class CategoryController extends Controller
         {
             $title = "أضافة تصنيف جديد";
             $category = new Category();
+            $getCategories = array();
             $success_message = "تم أضافة التصنيف بنجاح";
             $send = "أضافة";
         }
@@ -44,6 +45,7 @@ class CategoryController extends Controller
         {
             $title = "تعديل التصنيف ";
             $category = Category::findOrFail($id);
+            $getCategories = Category::with('subcategories')->where(['parent_id'=>0,'section_id'=>$category['section_id']])->get();
             $success_message = "تم تعديل التصنيف بنجاح";
             $send = "تعديل";
         }
@@ -62,7 +64,7 @@ class CategoryController extends Controller
             $customMessage = [
                 'category_name.required'=>'يجب اضافة اسم التصنيف',
                 'category_name.regex'=>'تنسيق الاسم غير صحيح',
-                'section_id.required'=>'يجب أضافة اسم القسم',
+                'section_id.required'=>'يجب اختيار القسم',
                 // 'category_image.mimes'=>'امتداد الملف غير صحيح',
                 'url.required'=>' يجب اضافة هذا الحقل',
                 'meta_title.required'=>' يجب اضافة هذا الحقل',
@@ -101,13 +103,29 @@ class CategoryController extends Controller
 
         }
         $sections = Section::get()->toArray();
-        return view('admin.categories.add-edit-category',compact('category','title','send','sections'));
+        return view('admin.categories.add-edit-category',compact('category','title','send','sections','getCategories'));
 
+    }
+    public function appendCategoriesLevel(Request $request)
+    {
+        if ($request->ajax())
+        {
+            $data = $request->all();
+            $getCategories = Category::with('subcategories')->where(['parent_id'=>0,'section_id'=>$data['section_id']])->get()->toArray();
+            return view('admin.categories.append_categories_level',compact('getCategories'));
+        }
     }
     public function delete($id)
     {
-        Category::where('id',$id)->delete();
+        $category =  Category::find($id); 
+        $path = $category->category_image; 
+        if (File::exists($path)) 
+         {
+          File::delete($path);
+        }
+        $category->delete();
         $success_message = "تم حذف التصنيف بنجاح";
         return redirect()->back()->with('success_message',$success_message);
     }
+   
 }

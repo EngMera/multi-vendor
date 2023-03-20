@@ -125,6 +125,31 @@ $(document).ready(function(){
             }
         })
     });
+
+    // Append Categories Level
+    $('#section_id').change(function(){
+        var section_id = $(this).val();
+        // alert(section_id);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type:'get',
+            url:'/admin/append-categories-level',
+            data:{section_id:section_id},
+            success:function(resp){
+                $('#appendCategoriesLevel').html(resp);
+                // alert('good');
+            },error:function(){
+                alert('خطأ');
+            }
+        });
+    });
+
+
+
+
+
     // Confirm Delete
     // $(".confirmDelete").click(function(){
     //     var title = $(this).attr("title");

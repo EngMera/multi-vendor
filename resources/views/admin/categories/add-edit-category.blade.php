@@ -1,4 +1,3 @@
-@extends('layouts.admin.master')
 @section('title')
   {{$title}}
 @endsection
@@ -215,5 +214,14 @@
     <!-- content @s -->
 @endsection
 @section('scripts')
+    
+@endsection
+
+@extends('layouts.admin.master')
+@section('title')
+  {{$title}}
+@endsection
+
+@section('style')
     
 @endsection

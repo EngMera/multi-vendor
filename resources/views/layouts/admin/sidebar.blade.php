@@ -133,6 +133,9 @@
                                 <a href="{{url('admin/categories')}}" class="nk-menu-link"><span class="nk-menu-text">التصنيفات </span></a>
                             </li>
                             <li class="nk-menu-item">
+                                <a href="{{url('admin/brands')}}" class="nk-menu-link"><span class="nk-menu-text">الماركات </span></a>
+                            </li>
+                            <li class="nk-menu-item">
                                 <a href="{{url('admin/products')}}" class="nk-menu-link"><span class="nk-menu-text">المنتجات </span></a>
                             </li>
                         </ul>

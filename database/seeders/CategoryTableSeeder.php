@@ -16,7 +16,7 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categories')->delete();
+        DB::table('categories')->truncate();
         $categories = [
             ['parent_id'=>0,'section_id'=>1,'category_name'=>'الرجال','category_image'=>'','category_discount'=>0,
              'description'=>'','url'=>'رجال','meta_title'=>'','meta_description'=>'','meta_keyword'=>'','status'=>1,

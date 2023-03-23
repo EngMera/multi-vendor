@@ -69,7 +69,13 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
          Route::match(['get','post'],'add-edit-category/{id?}', 'CategoryController@addEditCategory');
          Route::get('append-categories-level','CategoryController@appendCategoriesLevel');
 
-         
+         //  Brands
+         Route::get('brands','BrandController@brands');
+         Route::post('update-brand-status','BrandController@updateBrandStatus');//  Update Brand Status
+         Route::get('brands/{id}/delete','BrandController@delete');
+         Route::match(['get','post'],'add-edit-brand/{id?}', 'BrandController@addEditBrand');
+
+
          //admin logout
          Route::get('logout','AdminController@logout');
 

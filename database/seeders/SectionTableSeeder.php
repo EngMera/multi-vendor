@@ -16,7 +16,7 @@ class SectionTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('sections')->delete();
+        DB::table('sections')->truncate();
         $sections = [
             ['name'=>'ملابس',
             'status'=>1],

@@ -54,6 +54,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            
                                             <div class="col-md-6">
                                                 <div id="appendCategoriesLevel">
                                                     @include('admin.categories.append_categories_level')

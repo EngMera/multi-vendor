@@ -356,7 +356,7 @@ class AdminController extends Controller
     }
     public function viewVendorDetails($id)
     {
-        $vendor = Admin::with('vendorPersonal','vendorBusiness','vendorBank')
+        $vendor = Admin::with(['vendorPersonal','vendorBusiness','vendorBank'])
                                ->where('id',$id)->first();
         $vendor = json_decode(json_encode($vendor),true);
         return view('admin.admins.view-vendor-details',compact('vendor'));

@@ -179,7 +179,38 @@ $(document).ready(function(){
     })
     });
 
-
+    // Update Brand Status
+    $(document).on("click",".updateProductStatus",function () {
+        
+        var status  = $(this).children("em").attr("status");
+        var product_id = $(this).attr("product_id");
+        // alert(admin_id);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'post',
+            url: '/admin/update-product-status',
+            data: {
+                status:status,
+                product_id:product_id
+            },
+            success:function(resp){
+                if (resp['status']== 0) 
+                {
+                    $("#product-"+product_id).html("<em class='icon ni ni-cross-fill-c text-danger' status='Inactive' style='font-size: 25px'></em>");
+                }
+                else if (resp['status']== 1) 
+                {
+                    $("#product-"+product_id).html("<em class='icon ni ni-check-fill-c text-success' status='Active' style='font-size: 25px'></em>");
+                }
+                // alert(resp);
+            },
+            error:function(){
+                alert("Error");
+            }
+        })
+    });
 
 
 

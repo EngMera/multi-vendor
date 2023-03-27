@@ -39,7 +39,11 @@
                                                 <th scope="row">{{$loop->iteration}}</th>
                                                 <td>{{$brand['name']}}</td>
                                                 <td>
-                                                    <img src="{{asset($brand['brand_image'])}}"  style="height:40px; width:40px; border-radius:50%; object-fit:cover"alt="">
+                                                    @if (!empty($product['product_image']))
+                                                      <img src="{{asset($brand['brand_image'])}}"  style="height:40px; width:40px; border-radius:50%; object-fit:cover"alt="">
+                                                    @else
+                                                        <img src="{{asset('uploads/brand/no-image.jpg')}}"  style="height:40px; width:40px; border-radius:50%; object-fit:cover"alt="">
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     @if ($brand['status'] == 1)

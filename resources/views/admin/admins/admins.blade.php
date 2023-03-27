@@ -46,7 +46,12 @@
                                             <td>{{$admin['email']}}</td>
                                             <td>{{$admin['mobile']}}</td>
                                             <td>
-                                                <img src="{{asset($admin['image'])}}" style="height:35px;width:35px;border-radius:50%"alt="">
+                                                @if (!empty($product['product_image']))
+                                                   <img src="{{asset($admin['image'])}}" style="height:35px;width:35px;border-radius:50%"alt="">
+                                                @else
+                                                    <img src="{{asset('uploads/photos/no-image.jpg')}}"  style="height:40px; width:40px; border-radius:50%; object-fit:cover"alt="">
+                                                @endif
+
                                             </td>
                                             <td>
                                                 @if ($admin['status']==1)

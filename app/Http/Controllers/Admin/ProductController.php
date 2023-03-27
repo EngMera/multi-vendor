@@ -15,7 +15,7 @@ class ProductController extends Controller
 {
     public function products()
     {
-        $products = Product::with(['section','category'])->get()->toArray();
+        $products = Product::with(['section','category'])->paginate(10);
         return view('admin.products.products',compact('products'));
     }
     public function updateProductStatus(Request $request)
@@ -124,16 +124,24 @@ class ProductController extends Controller
              }
 
              // Upload product Image 
-             $uploadPath = 'uploads/product/';
-           if ($request->hasFile('product_image')) {
-               $file = $request->file('product_image');
-               $ext = $file->getClientOriginalExtension();
-               $filename = time().'.'.$ext;
-               $file->move('uploads/product/', $filename);
+             $uploadPath = 'uploads/product/images/';
+             if ($request->hasFile('product_image')) {
+                $file = $request->file('product_image');
+                $ext = $file->getClientOriginalExtension();
+                $filename = time().'.'.$ext;
+                $file->move('uploads/product/images/', $filename);
+                $product->product_image =  $uploadPath.$filename;
+             }
 
-               $product->product_image =  $uploadPath.$filename;
-           }
-
+            //  Upload Product Video 
+            $uploadPath = 'uploads/product/videos/';
+            if ($request->hasFile('product_video')) {
+                $file = $request->file('product_video');
+                $ext = $file->getClientOriginalExtension();
+                $filename = time().'.'.$ext;
+                $file->move('uploads/product/videos/', $filename);
+                $product->product_video =  $uploadPath.$filename;
+             }
              $product->status = $request->status == true ? '1':'0';
              $product->save();
             //  return $request;
@@ -150,6 +158,16 @@ class ProductController extends Controller
 
         return view('admin.products.add-edit-product',compact('product','title','send','success_message','categories','brands'));
         
+    }
+    public function deleteProductImage($id)
+    {
+        $product =  Product::find($id); 
+        $path = $product->product_image; 
+        if (File::exists($path)) 
+         {
+          File::delete($path);
+        }
+        $path->delete();
     }
     public function delete($id)
     {

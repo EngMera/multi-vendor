@@ -80,6 +80,8 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
          Route::post('update-product-status','ProductController@updateProductStatus');//  Update Product Status
          Route::get('products/{id}/delete','ProductController@delete');
          Route::match(['get','post'],'add-edit-product/{id?}', 'ProductController@addEditProduct');
+         Route::get('delete-product-image/{id}','ProductController@deleteProductImage');
+
 
 
 

@@ -46,7 +46,7 @@
                                                             @foreach ($categories as $section)
                                                                 <optgroup label="{{$section['name']}}"></optgroup>
                                                                 @foreach ($section['categories'] as $category)
-                                                                  <option value="{{$category['id']}}">&nbsp;&nbsp;&nbsp;--&nbsp;{{$category['category_name']}}</option>
+                                                                  <option @if(!empty($product['category_id']==$category['id'])) selected ="" @endif value="{{$category['id']}}">&nbsp;&nbsp;&nbsp;--&nbsp;{{$category['category_name']}}</option>
                                                                    @foreach ($category['subcategories'] as $subcategory)
                                                                       <option value="{{$subcategory['id']}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- {{$subcategory['category_name']}}</option>
                                                                    @endforeach
@@ -68,8 +68,6 @@
                                                                 <option value="{{$brand['id']}}" @if (!empty($product['brand_id']) && $product['brand_id']==$brand['id']) selected="" @endif>{{$brand['name']}}</option>
                                                             @endforeach
                                                             @error('brand_id')<div class="alert alert-danger">{{ $message }}</div>@enderror
-
-
                                                         </select>
                                                     </div>
                                                 </div>
@@ -159,6 +157,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <hr class="hr border-light">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label" for="product_image">صورة المنتج </label>
@@ -183,6 +182,22 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            @if (!empty($product['product_image']))
+                                                <div class="col-md-6">
+                                                    <a href="{{url('delete-product-image/{id}')}}"></a> <span >delete</span>
+                                                    <img src="{{asset($product['product_image'])}}" class="img-thumbnail" style="height: 200px; width:200px" alt="">
+                                                </div>
+                                            @endif
+                                            @if (!empty($product['product_video']))
+                                                <div class="col-md-6">
+                                                    <video width="320" height="240" autoplay>
+                                                        <source src="{{asset($product['product_video'])}}" type="video/mp4">
+                                                        <source src="{{asset($product['product_video'])}}" type="video/ogg">
+                                                            متصفحك الحالي لا يدعم تشغيل الفيديو.
+                                                    </video>
+                                                </div>
+                                            @endif
+                                            <hr class="hr border-light">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label" for="meta_title">عنوان الميتا    </label>
@@ -218,7 +233,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-12 ">
+                                            <hr class="hr border-light">
+                                            <div class="col-md-6 ">
                                                 <div class="form-group">
                                                     <label class="form-label me-3 " for="site-off">الحالة </label>
                                                     <div class=" custom-control custom-switch ">
@@ -227,7 +243,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+                                            <div class="col-md-6 ">
+                                                <div class="form-group">
+                                                    <label class="form-label me-3 " for="is_featured">متميز </label>
+                                                    <div class=" custom-control custom-switch ">
+                                                        <input type="checkbox" class="custom-control-input" name="is_featured" id="is_featured" value="نعم"
+                                                            @if(!empty($product['is_featured']) && $product['is_featured']== "نعم") checked="" @endif>
+                                                        <label class="custom-control-label" for="is_featured"><small>مميز نعم / لا</small></label>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <button type="submit" class="btn btn-lg btn-primary float-end  ">{{$send}}</button>

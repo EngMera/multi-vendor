@@ -161,17 +161,25 @@ class ProductController extends Controller
     }
     public function deleteProductImage($id)
     {
-        $product =  Product::find($id); 
+        $product =  Product::findOrFail($id); 
         $path = $product->product_image; 
         if (File::exists($path)) 
          {
           File::delete($path);
         }
-        $path->delete();
+        Product::where('id',$id)->update(['product_image'=>'']);
+        return redirect()->back();
+    }
+    public function addEditAttributes(Request $request , $id = null)
+    {
+        $product =  Product::findOrFail($id); 
+        return view('admin.products.add-edit-attributes',compact('product'));
+
+
     }
     public function delete($id)
     {
-        $product =  Product::find($id); 
+        $product =  Product::findOrFail($id); 
         $path = $product->product_image; 
         if (File::exists($path)) 
          {

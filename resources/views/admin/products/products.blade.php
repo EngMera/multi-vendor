@@ -44,7 +44,7 @@
                                                 </div>
                                                 </li>
                                                 <li class="nk-block-tools-opt">
-                                                <a href="{{url('admin/add-edit-product')}}"  class=" btn btn-primary d-none d-md-inline-flex"><em class="icon ni ni-plus"></em><span>أضافة منتج</span></a>
+                                                    <a href="{{url('admin/add-edit-product')}}"  class=" btn btn-primary d-none d-md-inline-flex"><span>أضافة منتج</span><em class="icon ni ni-plus"></em></a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -117,19 +117,19 @@
                                                 </span>
                                                 </div>
                                                 <div class="nk-tb-col">
-                                                <span class="tb-sub">{{$product['product_code']}}</span>
+                                                  <span class="tb-sub">{{$product['product_code']}}</span>
                                                 </div>
                                                 <div class="nk-tb-col">
-                                                <span class="tb-lead">{{$product['product_color']}}</span>
+                                                  <span class="tb-lead">{{$product['product_color']}}</span>
                                                 </div>
                                                 <div class="nk-tb-col">
-                                                <span class="tb-lead">{{$product['product_price']}}</span>
+                                                  <span class="tb-lead">{{$product['product_price']}}</span>
                                                 </div>
                                                 <div class="nk-tb-col tb-col-md">
-                                                <span class="tb-sub">{{$product['section']['name']}}</span>
+                                                  <span class="tb-sub">{{$product['section']['name']}}</span>
                                                 </div>
                                                 <div class="nk-tb-col tb-col-md">
-                                                    <span class="tb-sub">{{$product['category']['category_name']}}</span>
+                                                  <span class="tb-sub">{{$product['category']['category_name']}}</span>
                                                 </div>
                                                 <div class="nk-tb-col tb-col-md">
                                                     <span class="tb-sub">
@@ -148,12 +148,12 @@
                                                     <span class="tb-sub">
                                                         @if ($product['status'] == 1)
                                                             <a href="javascript:void(0)" id="product-{{$product['id']}}"
-                                                            product_id = {{ $product['id'] }} class="updateProductStatus">
+                                                               product_id = {{ $product['id'] }} class="updateProductStatus">
                                                                 <em class="icon ni ni-check-fill-c text-success" status="Active" style="font-size: 25px"></em>
                                                             </a>
                                                             @else
                                                             <a href="javascript:void(0)" id="product-{{$product['id']}}"
-                                                            product_id = {{ $product['id'] }} class="updateProductStatus">
+                                                               product_id = {{ $product['id'] }} class="updateProductStatus">
                                                                 <em class="icon ni ni-cross-fill-c text-danger" Status="Inactive" style="font-size: 25px"></em>
                                                             </a>
                                                         @endif
@@ -173,6 +173,7 @@
                                                             <ul class="link-list-opt no-bdr">
                                                                 <li><a href="{{url('admin/add-edit-product/'.$product['id'])}}"><em class="icon ni ni-edit"></em><span> تعديل المنتج</span></a></li>
                                                                 <li><a href="#"><em class="icon ni ni-eye"></em><span> عرض المنتج</span></a></li>
+                                                                <li><a href="{{url('admin/add-edit-attributes/'.$product['id'])}}"><em class="icon ni ni-plus-round-fill"></em><span> أضافة صفة </span></a></li>
                                                                 <li><a href="#"><em class="icon ni ni-activity-round"></em><span> الطلبات</span></a></li>
                                                                 <li><a href="#"data-bs-toggle="modal" data-bs-target="#delete{{$product['id']}}"><em class="icon ni ni-trash"></em><span> حذف المنتج</span></a>
                                                                 </li>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductAttribute;
 use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -170,12 +171,108 @@ class ProductController extends Controller
         Product::where('id',$id)->update(['product_image'=>'']);
         return redirect()->back();
     }
-    public function addEditAttributes(Request $request , $id = null)
+    public function addEditAttributes(Request $request , $id)
     {
-        $product =  Product::findOrFail($id); 
-        return view('admin.products.add-edit-attributes',compact('product'));
+        $product =  Product::select('id','product_name','product_code','product_color','product_price','product_image')
+                            ->with('attributes')->findOrFail($id); 
+        // $product = json_decode(json_encode($product),true);
+        
+        $title = "أضافة صفات المنتج ";
+        $success_message = "تم أضافة صفات المنتج بنجاح";
+        $send = "أضافة";
+        if ($request->isMethod('post')) {
+            $data = $request->all();
+            foreach ($data['sku'] as $key => $value) 
+            {
+                if (!empty($value)) 
+                {
+                    $skuCount = ProductAttribute::where('sku',$value)->count();
+                    if ($skuCount>0)
+                    {
+                        return redirect()->back()->with('error_message','وحدة حفظ المخزون SKU موجودة سابقا اعد ادخال قيمة اخرى');
+                    }
+                    $sizeCount = ProductAttribute::where(['product_id'=>$id,'size'=>$data['size'][$key]])->count();
+                    if ($sizeCount>0)
+                    {
+                        return redirect()->back()->with('error_message','الحجم    موجودة سابقا اعد ادخال قيمة اخرى');
+                    }
+                    $attribute = new ProductAttribute();
+                    $attribute->product_id = $id;
+                    $attribute->sku = $value;
+                    $attribute->size = $data['size'][$key];
+                    $attribute->price = $data['price'][$key];
+                    $attribute->stock = $data['stock'][$key];
+                    $attribute->status = $request->status == true ? '1':'0';
+                    $attribute->save();
+
+                }
+            }
+            return redirect()->back()->with('success_message',$success_message);
+        }
+        
+
+        return view('admin.products.add-edit-attributes',compact('product','title','success_message','send'));
 
 
+    }
+    public function editAttribute(Request $request ,$id)
+    {
+            if ($request->isMethod('post'))
+            {
+                $data = $request->all();
+                $attributeId = $data['id'];
+                $attribute = ProductAttribute::findOrFail($attributeId);
+    
+                $rules = [
+                    'size'=>'required|string',
+                    'price'=>'required',
+                    'sku'=>'required',
+                    'stock'=>'required',
+                ];
+    
+                $customMessage= [
+                    'size.required'=>'هذا الحقل مطلوب',
+                    'size.string'=>'هذا الحقل يجب ان يكون نصا ',
+                    'price.required'=>'هذا الحقل مطلوب',
+                    'sku.required'=>'هذا الحقل مطلوب',
+                    'stock.required'=>'هذا الحقل مطلوب',
+                ];
+                
+
+                $this->validate($request,$rules,$customMessage);
+  
+                $attribute->size = $data['size'];
+                $attribute->sku = $data['sku'];
+                $attribute->price = $data['price'];
+                $attribute->stock = $data['stock'];
+                // $attribute->status = $request->status == true ? '1':'0';
+                $attribute->update();
+                return redirect()->back()->with('success_message','تم تعديل الصفه بنجاح');
+            }
+        
+       
+    }
+    public function updateAttributeStatus(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = $request->all();
+            if ($data['status']== 'Active')
+            {
+                $status = 0;
+            }
+            else
+            {
+                $status = 1;
+            }
+            ProductAttribute::where('id',$data['attribute_id'])->update(['status'=>$status]);
+            return response()->json(['status'=>$status,'attribute_id'=>$data['attribute_id']]);
+        }
+    }
+    public function deleteAttribute($id)
+    {
+        $attribute = ProductAttribute::findOrFail($id)->delete();
+        $success_message = "تم حذف الصفة بنجاح";
+        return redirect()->back()->with('success_message',$success_message);
     }
     public function delete($id)
     {

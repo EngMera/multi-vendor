@@ -81,7 +81,11 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
          Route::get('products/{id}/delete','ProductController@delete');
          Route::match(['get','post'],'add-edit-product/{id?}', 'ProductController@addEditProduct');
          Route::get('delete-product-image/{id}','ProductController@deleteProductImage');
-         Route::match(['get','post'],'add-edit-attributes/{id?}', 'ProductController@addEditAttributes');
+         Route::match(['get','post'],'add-edit-attributes/{id}', 'ProductController@addEditAttributes');
+         Route::post('update-attribute-status','ProductController@updateAttributeStatus');//  Update Product Status
+         Route::get('attribute/{id}/delete','ProductController@deleteAttribute');
+         Route::post('edit-attribute/{id}','ProductController@editAttribute');
+
 
 
          //admin logout

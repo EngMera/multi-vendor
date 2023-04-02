@@ -17,4 +17,8 @@ class ProductAttribute extends Model
         'sku',
         'status',
     ] ;
+    // public function products()
+    // {
+    //     return $this->belongsTo(Product::class,'product_id');
+    // }
 }

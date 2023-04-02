@@ -239,7 +239,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label me-3 " for="site-off">الحالة </label>
                                                     <div class=" custom-control custom-switch ">
-                                                        <input type="checkbox" class="custom-control-input" name="status" id="site-off"{{$product->status == '1' ? 'checked' : '' }}>
+                                                        <input type="checkbox" class="custom-control-input" name="status" id="site-off"value="{{$product->status == '1' ? 'checked' : '' }}">
                                                         <label class="custom-control-label" for="site-off"><small>مفعل نعم / لا</small></label>
                                                     </div>
                                                 </div>

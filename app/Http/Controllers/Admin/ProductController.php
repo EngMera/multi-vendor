@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductAttribute;
+use App\Models\ProductImage;
 use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -143,7 +144,7 @@ class ProductController extends Controller
                 $file->move('uploads/product/videos/', $filename);
                 $product->product_video =  $uploadPath.$filename;
              }
-             $product->status = $request->status == true ? '1':'0';
+             $product->status = 1;
              $product->save();
             //  return $request;
 
@@ -237,10 +238,7 @@ class ProductController extends Controller
                     'sku.required'=>'هذا الحقل مطلوب',
                     'stock.required'=>'هذا الحقل مطلوب',
                 ];
-                
-
                 $this->validate($request,$rules,$customMessage);
-  
                 $attribute->size = $data['size'];
                 $attribute->sku = $data['sku'];
                 $attribute->price = $data['price'];
@@ -249,9 +247,64 @@ class ProductController extends Controller
                 $attribute->update();
                 return redirect()->back()->with('success_message','تم تعديل الصفه بنجاح');
             }
-        
-       
     }
+    public function addImages(Request $request , $id)
+    {
+        $product = Product::select(
+                                   ['id','product_name','product_code','product_color',
+                                   'product_price','product_image'])
+                            ->with('images')->findOrFail($id);
+
+       if($request->isMethod('post'))
+       {
+            // Upload product Image 
+            $i = 0;
+            $uploadPath = 'uploads/product/images/';
+            // Upload Product Images 
+            if ($request->hasFile('image'))
+            {
+                foreach ($request->file(['image']) as $image) 
+                {
+                    $ext = $image->getClientOriginalExtension();
+                    $filename = time().$i++.'.'.$ext;
+                    $image->move($uploadPath, $filename);
+                    $final =  $uploadPath.$filename;
+                    $product->images()->create([
+                        'product_id'=>$product->id,
+                        'image'=>$final,
+                        'status'=>1,
+                    ]);
+                }
+                
+            }
+            //  Upload Product main image 
+            if ($request->hasFile('product_image')) {
+                $file = $request->file('product_image');
+                $extention = $file->getClientOriginalExtension();
+                $imageName = time().'.'.$extention;
+                $file->move($uploadPath, $imageName);
+                $product->product_image= $uploadPath.$imageName;
+                $product->update();
+            }
+            return redirect()->back()->with('success_message',' تم اضافة'.$i.' الصور بنجاح');
+       }
+        
+
+        // return response()->json(['success'=>$imageName]);
+        return view('admin.products.add-images',compact('product'));
+    }
+    public function deleteImage($id)
+    {
+        $image = ProductImage::findOrFail($id);
+        $path = $image->image; 
+        if (File::exists($path)) 
+         {
+          File::delete($path);
+        }
+        $image->delete();
+        return redirect()->back();
+    }
+
     public function updateAttributeStatus(Request $request)
     {
         if ($request->ajax()) {
@@ -277,11 +330,25 @@ class ProductController extends Controller
     public function delete($id)
     {
         $product =  Product::findOrFail($id); 
-        $path = $product->product_image; 
-        if (File::exists($path)) 
-         {
-          File::delete($path);
+        $productImage = ProductImage::where('product_id',$id)->get();
+        if (File::exists($product->product_image)) 
+        {
+          File::delete($product->product_image);
         }
+        if (!empty($productImage)) 
+        {
+
+            foreach ($productImage as $image) 
+            {
+                // dd($image->image);
+                if (File::exists($image->image)) 
+                {
+                File::delete($image->image);
+                }
+            }
+        
+        }
+        $product->images()->delete();
         $product->delete();
         $success_message = "تم حذف المنتج بنجاح";
         return redirect()->back()->with('success_message',$success_message);

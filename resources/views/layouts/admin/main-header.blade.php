@@ -252,7 +252,12 @@
                         <a href="#" class="dropdown-toggle me-n1" data-bs-toggle="dropdown">
                             <div class="user-toggle">
                                 <div class="user-avatar sm">
+                                    @if (!empty(Auth::guard('admin')->user()->image))
+                                        <img src="{{url(Auth::guard('admin')->user()->image)}}" alt="image" style="max-width: 100%">
+                                    @else
                                     <em class="icon ni ni-user-alt"></em>
+                                        
+                                    @endif
                                 </div>
                                 <div class="user-info d-none d-xl-block">
                                     <div class="user-name dropdown-indicator">{{Auth::guard('admin')->user()->name}}</div>
@@ -263,7 +268,12 @@
                             <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                                 <div class="user-card">
                                     <div class="user-avatar">
-                                        <span>AB</span>
+                                        @if (!empty(Auth::guard('admin')->user()->image))
+                                            <img src="{{url(Auth::guard('admin')->user()->image)}}" alt="image" style="max-width: 100%">
+                                        @else
+                                        <em class="icon ni ni-user-alt"></em>
+                                            
+                                        @endif
                                     </div>
                                     <div class="user-info">
                                         <span class="lead-text">{{Auth::guard('admin')->user()->name}}</span>
@@ -273,10 +283,10 @@
                             </div>
                             <div class="dropdown-inner">
                                 <ul class="link-list">
-                                    <li><a href="html/user-profile-regular.html"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
-                                    <li><a href="html/user-profile-setting.html"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
+                                    <li><a href="html/user-profile-regular.html"><em class="icon ni ni-user-alt"></em><span>عرض الصفحة الشخصية </span></a></li>
+                                    <li><a href="{{url('admin/update-admin-details')}}"><em class="icon ni ni-setting-alt"></em><span> اعدادات الحساب</span></a></li>
                                     <li><a href="html/user-profile-activity.html"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li>
-                                    <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>Dark Mode</span></a></li>
+                                    <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span> الوضع الليلي</span></a></li>
                                 </ul>
                             </div>
                             <div class="dropdown-inner">

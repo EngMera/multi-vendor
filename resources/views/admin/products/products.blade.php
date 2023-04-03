@@ -107,7 +107,7 @@
                                                 </div>
                                                 <div class="nk-tb-col tb-col-sm">
                                                 <span class="tb-product">
-                                                <img src="./images/product/a.png" alt="" >
+                                                {{-- <img src="./images/product/a.png" alt="" > --}}
                                                 @if (!empty($product['product_image']))
                                                     <img src="{{asset($product['product_image'])}}" class="thumb" alt="">
                                                 @else
@@ -173,7 +173,8 @@
                                                             <ul class="link-list-opt no-bdr">
                                                                 <li><a href="{{url('admin/add-edit-product/'.$product['id'])}}"><em class="icon ni ni-edit"></em><span> تعديل المنتج</span></a></li>
                                                                 <li><a href="#"><em class="icon ni ni-eye"></em><span> عرض المنتج</span></a></li>
-                                                                <li><a href="{{url('admin/add-edit-attributes/'.$product['id'])}}"><em class="icon ni ni-plus-round-fill"></em><span> أضافة صفة </span></a></li>
+                                                                <li><a href="{{url('admin/add-edit-attributes/'.$product['id'])}}"><em class="icon ni ni-plus-round-fill"></em><span>أضافة صفات المنتج </span></a></li>
+                                                                <li><a href="{{url('admin/add-images/'.$product['id'])}}"><em class="icon ni ni-img-fill"></em><span> أضافة صور </span></a></li>
                                                                 <li><a href="#"><em class="icon ni ni-activity-round"></em><span> الطلبات</span></a></li>
                                                                 <li><a href="#"data-bs-toggle="modal" data-bs-target="#delete{{$product['id']}}"><em class="icon ni ni-trash"></em><span> حذف المنتج</span></a>
                                                                 </li>

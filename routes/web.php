@@ -85,8 +85,11 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
          Route::post('update-attribute-status','ProductController@updateAttributeStatus');//  Update Product Status
          Route::get('attribute/{id}/delete','ProductController@deleteAttribute');
          Route::post('edit-attribute/{id}','ProductController@editAttribute');
+         Route::match(['get','post'],'add-images/{id}', 'ProductController@addImages');
+         Route::get('delete-image/{id}','ProductController@deleteImage');
 
 
+         
 
          //admin logout
          Route::get('logout','AdminController@logout');

@@ -12,6 +12,21 @@
             <div class="container-fluid">
                 <div class="nk-content-inner">
                     <div class="nk-content-body">
+                        <div class="card">
+                            <div class="card-inner">
+                                <div class="nk-block-head">
+                                    <div class="nk-block-between g-3">
+                                        <div class="nk-block-head-content">
+                                            <h5 class="nk-block-title text-primary">أضافة صفات المنتج</h5>
+                                        </div>
+                                        <div class="nk-block-head-content">
+                                            <a href="{{url('admin/products')}}" class="btn btn-outline-light bg-primary  text-white d-none d-sm-inline-flex"><em class="icon ni ni-arrow-right"></em></a>
+                                            <a href="{{url('admin/products')}}" class="btn btn-icon btn-outline-light bg-primary text-white d-inline-flex d-sm-none"><em class="icon ni ni-arrow-right"></em></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         {{-- Product Information Card --}}
                         <div class="card">
                             <div class="card-inner">

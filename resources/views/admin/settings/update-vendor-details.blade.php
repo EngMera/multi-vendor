@@ -135,6 +135,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
+                                            <button class="btn btn-light float-end mx-2" type="reset">الغاء</button>
                                             <button type="submit" class="btn  btn-primary float-end ">تعديل</button>
                                         </div>
                                     </div>
@@ -308,6 +309,7 @@
                                    
                                     <div class="col-md-12">
                                         <div class="form-group">
+                                            <button class="btn btn-light float-end mx-2" type="reset">الغاء</button>
                                             <button type="submit" class="btn  btn-primary float-end ">تعديل</button>
                                         </div>
                                     </div>
@@ -365,6 +367,7 @@
                                     
                                     <div class="col-md-12">
                                         <div class="form-group">
+                                            <button class="btn btn-light float-end mx-2" type="reset">الغاء</button>
                                             <button type="submit" class="btn  btn-primary float-end ">تعديل</button>
                                         </div>
                                     </div>

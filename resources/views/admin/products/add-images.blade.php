@@ -106,33 +106,34 @@
                                             
                                             <div class="col-md-12 mt-5">
                                                     <div class="form-group">
-                                                        <button type="submit" class="btn btn-lg btn-primary float-end  ">أضافة</button>
+                                                        <button class="btn btn-light float-end mx-2" type="reset">الغاء</button>
+                                                        <button type="submit" class="btn btn-primary float-end  ">أضافة</button>
                                                     </div>
                                             </div>
                                         </div>
                                     </form>
-                                        @if (!empty($product['images']))
-                                        <div class="row mt-5">
-                                            <h6 class="title nk-block-title mb-4" style="color:#9d72ff">  صور المنتج :</h6>
-                                            @foreach ($product['images'] as $image)
-                                                <div class="col-md-2 p-2 " style="position: relative">
-                                                    <a href="{{asset($image['image'])}}" class="gallery-image popup-image">
-                                                      <img src="{{asset($image['image'])}}" class=" mfp-img" style="border-radius:5px; height:150px ; width:150px; border:1px solid #eee ; object-fit:cover" alt="">
-
-                                                    </a>
-                                                    <a href="{{url('admin/delete-image/'.$image['id'])}}"><em class="icon ni ni-cross-sm text-white" style="position: absolute;z-index:10; background-color:red; border-radius:50%;left: 6px;font-size: 20px;top: 7px;"></em></a>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        @endif
-                                    <div id="uploadStatus"></div>
+                                        
                                     
 
-                                <div class="gallery">
-
-                                </div>
                             </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-inner">
+                                <h6 class="title nk-block-title mb-4" style="color:#9d72ff">  صور المنتج :</h6>
+                                @if (!empty($product['images']))
+                                    <div class="row mt-5">
+                                        @foreach ($product['images'] as $image)
+                                            <div class="col-md-2 p-2 " style="position: relative">
+                                                <a href="{{asset($image['image'])}}" class="gallery-image popup-image">
+                                                    <img src="{{asset($image['image'])}}" class=" mfp-img" style="border-radius:5px; height:150px ; width:150px; border:1px solid #eee ; object-fit:cover" alt="">
 
+                                                </a>
+                                                <a href="{{url('admin/delete-image/'.$image['id'])}}"><em class="icon ni ni-cross-sm text-white" style="position: absolute;z-index:10; background-color:red; border-radius:50%;left: 6px;font-size: 20px;top: 7px;"></em></a>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>

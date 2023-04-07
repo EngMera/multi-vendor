@@ -51,7 +51,8 @@
                                             
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-lg btn-primary float-end  ">{{$send}}</button>
+                                                    <button class="btn btn-light float-end mx-2" type="reset">الغاء</button>
+                                                    <button type="submit" class="btn  btn-primary float-end  ">{{$send}}</button>
                                                 </div>
                                             </div>
                                         </div>

@@ -31,5 +31,5 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{url('assets/frontend/images/favicon.png')}}">
 
-    <title>WEBsite</title>
+    <title>@yield('title')</title>
 </head>

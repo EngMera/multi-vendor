@@ -27,7 +27,7 @@ Route::get('/dashboard', function(){
 })->middleware('auth')->name('dashboard');
 
 Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function () {
-    
+
     //admin login
     Route::match(['get','post'],'login', 'AdminController@login');
 
@@ -61,8 +61,8 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
          Route::post('update-section-status','SectionController@updateSectionStatus'); //  Update Section Status
          Route::get('sections/{id}/delete','SectionController@delete');
          Route::match(['get','post'],'add-edit-section/{id?}', 'SectionController@addEditSection');
-         
-         // Categories  
+
+         // Categories
          Route::get('categories','CategoryController@categories');
          Route::post('update-category-status','CategoryController@updateCategoryStatus');//  Update Category Status
          Route::get('categories/{id}/delete','CategoryController@delete');
@@ -74,7 +74,7 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
          Route::post('update-brand-status','BrandController@updateBrandStatus');//  Update Brand Status
          Route::get('brands/{id}/delete','BrandController@delete');
          Route::match(['get','post'],'add-edit-brand/{id?}', 'BrandController@addEditBrand');
-        
+
          //  Products
          Route::get('products','ProductController@products');
          Route::post('update-product-status','ProductController@updateProductStatus');//  Update Product Status
@@ -88,8 +88,9 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
          Route::match(['get','post'],'add-images/{id}', 'ProductController@addImages');
          Route::get('delete-image/{id}','ProductController@deleteImage');
 
+         //  Banners
+         Route::get('banners','BannerController@banners');
 
-         
 
          //admin logout
          Route::get('logout','AdminController@logout');

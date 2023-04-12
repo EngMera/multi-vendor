@@ -77,7 +77,7 @@
                             <li class="nk-menu-item">
                                 <a href="{{ url('admin/update-admin-details') }}" class="nk-menu-link"><span class="nk-menu-text">تعديل التفاصيل  </span></a>
                             </li>
-                           
+
                         </ul>
                     </li>
                     <li class="nk-menu-item has-sub">
@@ -115,10 +115,10 @@
                         </ul>
                     </li>
                     @endif
-                    
+
                     <!-- الاعدادات-->
 
-                    
+
                     <!-- كتالوج-->
                     <li class="nk-menu-item has-sub">
                         <a href="#" class="nk-menu-link nk-menu-toggle">
@@ -147,46 +147,14 @@
                     </li>
                     <!-- المتجر -->
 
-                    <!-- المنتجات-->
-                    <li class="nk-menu-item has-sub">
-                        <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-icon"><em class="icon ni ni-package-fill"></em></span>
-                            <span class="nk-menu-text">المنتجات</span>
-                        </a>
-                        <ul class="nk-menu-sub">
-                            <li class="nk-menu-item">
-                                <a href="html/product-list.html" class="nk-menu-link"><span class="nk-menu-text">جميع المنتجات</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="html/product-card.html" class="nk-menu-link"><span class="nk-menu-text">أضافة منتج</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="html/product-details.html" class="nk-menu-link"><span class="nk-menu-text">تفاصيل المنتج</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="html/product-list.html" class="nk-menu-link"><span class="nk-menu-text">التصنيفات</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="html/product-list.html" class="nk-menu-link"><span class="nk-menu-text">الماركة </span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="html/product-list.html" class="nk-menu-link"><span class="nk-menu-text">الصفات </span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="html/product-list.html" class="nk-menu-link"><span class="nk-menu-text">الالوان </span></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- المنتجات-->
-
-                    <!-- الطلبات-->
+                    <!-- الصور المتحركة-->
                     <li class="nk-menu-item">
-                        <a href="html/index-sales.html" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-cart-fill"></em></span>
-                            <span class="nk-menu-text">الطلبات</span>
+                        <a href="{{url('admin/banners')}}" class="nk-menu-link">
+                            <span class="nk-menu-icon"><em class="icon ni ni-img-fill"></em></span>
+                            <span class="nk-menu-text">الصور المتحركة</span>
                         </a>
                     </li>
-                    <!-- الطلبات -->
+                    <!-- الصور المتحركة -->
 
                    <!-- المبيعات-->
                     <li class="nk-menu-item">

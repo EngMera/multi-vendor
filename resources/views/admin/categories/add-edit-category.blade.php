@@ -1,9 +1,10 @@
+@extends('layouts.admin.master')
 @section('title')
   {{$title}}
 @endsection
 
 @section('style')
-    
+
 @endsection
 @section('content')
     <!-- content @s -->
@@ -32,7 +33,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="category_name">اسم التصنيف   </label>
                                                     <div class="form-control-wrap">
-                                                        <input type="text" class="form-control " id="category_name" name="category_name" 
+                                                        <input type="text" class="form-control " id="category_name" name="category_name"
                                                         @if (empty($category['category_name']))
                                                         placeholder = "ادخل اسم التصنيف"
                                                         value="{{old('category_name')}}"@else value="{{$category['category_name']}}"@endif  aria-invalid="false" >
@@ -54,7 +55,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="col-md-6">
                                                 <div id="appendCategoriesLevel">
                                                     @include('admin.categories.append_categories_level')
@@ -76,7 +77,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="category_discount">خصم التصنيف</label>
                                                     <div class="form-control-wrap">
-                                                        <input type="number" class="form-control " id="category_discount" name="category_discount" 
+                                                        <input type="number" class="form-control " id="category_discount" name="category_discount"
                                                         @if (empty($category['category_discount']))
                                                         placeholder = "ادخل خصم التصنيف "
                                                         value="{{old('category_discount')}}"@else value="{{$category['category_discount']}}"@endif  aria-invalid="false" >
@@ -88,7 +89,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="description">وصف التصنيف</label>
                                                     <div class="form-control-wrap">
-                                                        <textarea type="text" class="form-control " id="description" name="description">{{$category['description']}}</textarea> 
+                                                        <textarea type="text" class="form-control " id="description" name="description">{{$category['description']}}</textarea>
                                                         @error('description')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                                     </div>
                                                 </div>
@@ -97,7 +98,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="url">URL </label>
                                                     <div class="form-control-wrap">
-                                                        <input type="text" class="form-control " id="url" name="url" 
+                                                        <input type="text" class="form-control " id="url" name="url"
                                                         @if (empty($category['url']))
                                                         placeholder = "ادخل  url "
                                                         value="{{old('url')}}"@else value="{{$category['url']}}"@endif  aria-invalid="false" >
@@ -109,7 +110,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="meta_title"> عنوان<span style="color:#777777"> (meta_title)</span> </label>
                                                     <div class="form-control-wrap">
-                                                        <input type="text" class="form-control " id="meta_title" name="meta_title" 
+                                                        <input type="text" class="form-control " id="meta_title" name="meta_title"
                                                         @if (empty($category['meta_title']))
                                                         placeholder = "ادخل  meta_title "
                                                         value="{{old('meta_title')}}"@else value="{{$category['meta_title']}}"@endif  aria-invalid="false" >
@@ -121,7 +122,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="meta_description"> الوصف<span style="color:#777777"> (meta_description)</span> </label>
                                                     <div class="form-control-wrap">
-                                                        <input type="text" class="form-control " id="meta_description" name="meta_description" 
+                                                        <input type="text" class="form-control " id="meta_description" name="meta_description"
                                                         @if (empty($category['meta_description']))
                                                         placeholder = "ادخل  meta_description "
                                                         value="{{old('meta_description')}}"@else value="{{$category['meta_description']}}"@endif  aria-invalid="false" >
@@ -133,7 +134,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="meta_keyword"> الكلمات التعريفية<span style="color:#777777"> (meta_keyword)</span> </label>
                                                     <div class="form-control-wrap">
-                                                        <input type="text" class="form-control " id="meta_keyword" name="meta_keyword" 
+                                                        <input type="text" class="form-control " id="meta_keyword" name="meta_keyword"
                                                         @if (empty($category['meta_keyword']))
                                                         placeholder = "ادخل  meta_keyword "
                                                         value="{{old('meta_keyword')}}"@else value="{{$category['meta_keyword']}}"@endif  aria-invalid="false" >
@@ -150,7 +151,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <button class="btn btn-light float-end mx-2" type="reset">الغاء</button>
@@ -159,9 +160,9 @@
                                             </div>
                                         </div>
                                     </form>
-                               
+
                                </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -210,20 +211,13 @@
         @endif
 
 
-        
-       
- 
+
+
+
     <!-- content @s -->
 @endsection
 @section('scripts')
-    
+
 @endsection
 
-@extends('layouts.admin.master')
-@section('title')
-  {{$title}}
-@endsection
 
-@section('style')
-    
-@endsection

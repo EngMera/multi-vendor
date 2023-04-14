@@ -26,10 +26,10 @@ $(document).ready(function(){
             }
         });
     });
-    
+
     // Update Admins Status
     $(document).on("click",".updateAdminStatus",function () {
-      
+
         var status  = $(this).children("em").attr("status");
         var admin_id = $(this).attr("admin_id");
         // alert(admin_id);
@@ -44,11 +44,11 @@ $(document).ready(function(){
                 admin_id:admin_id
             },
             success:function(resp){
-                if (resp['status']== 0) 
+                if (resp['status']== 0)
                 {
                     $("#admin-"+admin_id).html("<em class='icon ni ni-cross-fill-c text-danger' status='Inactive' style='font-size: 25px'></em>");
                 }
-                else if (resp['status']== 1) 
+                else if (resp['status']== 1)
                 {
                     $("#admin-"+admin_id).html("<em class='icon ni ni-check-fill-c text-success' status='Active' style='font-size: 25px'></em>");
                 }
@@ -62,7 +62,7 @@ $(document).ready(function(){
 
     // Update Sections Status
     $(document).on("click",".updateSectionStatus",function () {
-      
+
         var status  = $(this).children("em").attr("status");
         var section_id = $(this).attr("section_id");
         // alert(admin_id);
@@ -77,11 +77,11 @@ $(document).ready(function(){
                 section_id:section_id
             },
             success:function(resp){
-                if (resp['status']== 0) 
+                if (resp['status']== 0)
                 {
                     $("#section-"+section_id).html("<em class='icon ni ni-cross-fill-c text-danger' status='Inactive' style='font-size: 25px'></em>");
                 }
-                else if (resp['status']== 1) 
+                else if (resp['status']== 1)
                 {
                     $("#section-"+section_id).html("<em class='icon ni ni-check-fill-c text-success' status='Active' style='font-size: 25px'></em>");
                 }
@@ -95,7 +95,7 @@ $(document).ready(function(){
 
     // Update Category Status
     $(document).on("click",".updateCategoryStatus",function () {
-      
+
         var status  = $(this).children("em").attr("status");
         var category_id = $(this).attr("category_id");
         // alert(admin_id);
@@ -110,11 +110,11 @@ $(document).ready(function(){
                 category_id:category_id
             },
             success:function(resp){
-                if (resp['status']== 0) 
+                if (resp['status']== 0)
                 {
                     $("#category-"+category_id).html("<em class='icon ni ni-cross-fill-c text-danger' status='Inactive' style='font-size: 25px'></em>");
                 }
-                else if (resp['status']== 1) 
+                else if (resp['status']== 1)
                 {
                     $("#category-"+category_id).html("<em class='icon ni ni-check-fill-c text-success' status='Active' style='font-size: 25px'></em>");
                 }
@@ -148,7 +148,7 @@ $(document).ready(function(){
 
     // Update Brands Status
     $(document).on("click",".updateBrandStatus",function () {
-    
+
     var status  = $(this).children("em").attr("status");
     var brand_id = $(this).attr("brand_id");
     // alert(admin_id);
@@ -163,11 +163,11 @@ $(document).ready(function(){
             brand_id:brand_id
         },
         success:function(resp){
-            if (resp['status']== 0) 
+            if (resp['status']== 0)
             {
                 $("#brand-"+brand_id).html("<em class='icon ni ni-cross-fill-c text-danger' status='Inactive' style='font-size: 25px'></em>");
             }
-            else if (resp['status']== 1) 
+            else if (resp['status']== 1)
             {
                 $("#brand-"+brand_id).html("<em class='icon ni ni-check-fill-c text-success' status='Active' style='font-size: 25px'></em>");
             }
@@ -181,7 +181,7 @@ $(document).ready(function(){
 
     // Update Products Status
     $(document).on("click",".updateProductStatus",function () {
-        
+
         var status  = $(this).children("em").attr("status");
         var product_id = $(this).attr("product_id");
         // alert(admin_id);
@@ -196,11 +196,11 @@ $(document).ready(function(){
                 product_id:product_id
             },
             success:function(resp){
-                if (resp['status']== 0) 
+                if (resp['status']== 0)
                 {
                     $("#product-"+product_id).html("<em class='icon ni ni-cross-fill-c text-danger' status='Inactive' style='font-size: 25px'></em>");
                 }
-                else if (resp['status']== 1) 
+                else if (resp['status']== 1)
                 {
                     $("#product-"+product_id).html("<em class='icon ni ni-check-fill-c text-success' status='Active' style='font-size: 25px'></em>");
                 }
@@ -218,18 +218,18 @@ $(document).ready(function(){
         var maxField = 10; //Input fields increment limitation
         var addButton = $('.add_button'); //Add button selector
         var wrapper = $('.field_wrapper'); //Input field wrapper
-        var fieldHTML = '<div class="d-flex mt-2" ><input type="text" name="size[]" value=""class="form-control " placeholder="ادخل الحجم .."  style="display: inline-block; width: 80%;"required/><input type="text" name="sku[]" value=""class="form-control mx-2" placeholder="ادخل وحدة حفظ المخزون SKU .." style="display: inline-block; width: 80%;"required/><input type="text" name="price[]" value=""class="form-control mx-2" placeholder="ادخل السعر .."  style="display: inline-block; width: 80%;"required/><input type="text" name="stock[]" value=""class="form-control mx-2" placeholder="ادخل المخزن .."  style="display: inline-block; width: 80%;"required/><a href="javascript:void(0);" class="remove_button"><strong style="background-color: #f70202;margin-right: 7px;padding: 3px 7.8px;color: white;border-radius: 5px;font-weight: bold;">x</strong></a></div>'; //New input field html 
+        var fieldHTML = '<div class="d-flex mt-2" ><input type="text" name="size[]" value=""class="form-control " placeholder="ادخل الحجم .."  style="display: inline-block; width: 80%;"required/><input type="text" name="sku[]" value=""class="form-control mx-2" placeholder="ادخل وحدة حفظ المخزون SKU .." style="display: inline-block; width: 80%;"required/><input type="text" name="price[]" value=""class="form-control mx-2" placeholder="ادخل السعر .."  style="display: inline-block; width: 80%;"required/><input type="text" name="stock[]" value=""class="form-control mx-2" placeholder="ادخل المخزن .."  style="display: inline-block; width: 80%;"required/><a href="javascript:void(0);" class="remove_button"><strong style="background-color: #f70202;margin-right: 7px;padding: 3px 7.8px;color: white;border-radius: 5px;font-weight: bold;">x</strong></a></div>'; //New input field html
         var x = 1; //Initial field counter is 1
-    
+
         //Once add button is clicked
         $(addButton).click(function(){
             //Check maximum number of input fields
-            if(x < maxField){ 
+            if(x < maxField){
                 x++; //Increment field counter
                 $(wrapper).append(fieldHTML); //Add field html
             }
         });
-    
+
         //Once remove button is clicked
         $(wrapper).on('click', '.remove_button', function(e){
             e.preventDefault();
@@ -242,7 +242,7 @@ $(document).ready(function(){
 
     // Update Attributes Status
         $(document).on("click",".updateAttributeStatus",function () {
-                
+
             var status  = $(this).children("em").attr("status");
             var attribute_id = $(this).attr("attribute_id");
             // alert(admin_id);
@@ -257,11 +257,11 @@ $(document).ready(function(){
                     attribute_id:attribute_id
                 },
                 success:function(resp){
-                    if (resp['status']== 0) 
+                    if (resp['status']== 0)
                     {
                         $("#attribute-"+attribute_id).html("<em class='icon ni ni-cross-fill-c text-danger' status='Inactive' style='font-size: 25px'></em>");
                     }
-                    else if (resp['status']== 1) 
+                    else if (resp['status']== 1)
                     {
                         $("#attribute-"+attribute_id).html("<em class='icon ni ni-check-fill-c text-success' status='Active' style='font-size: 25px'></em>");
                     }
@@ -271,8 +271,41 @@ $(document).ready(function(){
                     alert("Error");
                 }
             })
-});
+        });
 
+
+    // Update Banners Status
+        $(document).on("click",".updateBannerstatus",function () {
+
+            var status  = $(this).children("em").attr("status");
+            var banner_id = $(this).attr("banner_id");
+            // alert(admin_id);
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/admin/update-banner-status',
+                data: {
+                    status:status,
+                    banner_id:banner_id
+                },
+                success:function(resp){
+                    if (resp['status']== 0)
+                    {
+                        $("#banner-"+banner_id).html("<em class='icon ni ni-cross-fill-c text-danger' status='Inactive' style='font-size: 25px'></em>");
+                    }
+                    else if (resp['status']== 1)
+                    {
+                        $("#banner-"+banner_id).html("<em class='icon ni ni-check-fill-c text-success' status='Active' style='font-size: 25px'></em>");
+                    }
+                    // alert(resp);
+                },
+                error:function(){
+                    alert("Error");
+                }
+            })
+        });
 
 
     // Confirm Delete

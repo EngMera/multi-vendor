@@ -90,10 +90,18 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
 
          //  Banners
          Route::get('banners','BannerController@banners');
+         Route::post('update-banner-status','BannerController@updateBannerStatus');//  Update Banner Status
+         Route::get('banners/{id}/delete','BannerController@delete');
+         Route::match(['get','post'],'add-edit-banner/{id?}', 'BannerController@addEditBanner');
+
 
 
          //admin logout
          Route::get('logout','AdminController@logout');
 
     });
+});
+
+Route::namespace('App\Http\Controllers\Front')->group(function(){
+    Route::get('/','IndexController@index');
 });

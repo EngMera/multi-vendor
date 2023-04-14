@@ -31,7 +31,7 @@
 
                     <!-- زيارة المتجر  -->
                     <li class="nk-menu-item">
-                        <a href="html/lms/index.html" class="nk-menu-link">
+                        <a href="{{url('/')}}" target="_blank" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-bag"></em></span>
                             {{-- <span class="nk-menu-icon"><em class="icon ni ni-book-read"></em></span> --}}
                             <span class="nk-menu-text">زيارة المتجر </span><span class="nk-menu-badge">HOT</span>

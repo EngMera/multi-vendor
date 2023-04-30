@@ -15,7 +15,7 @@
                         <div class="nk-block-head nk-block-head-sm">
                             <div class="nk-block-between">
                                 <div class="nk-block-head-content">
-                                <h5 class="nk-block-title  text-primary">قائمة الصور المتحركة</h5>
+                                <h5 class="nk-block-title  text-primary">قائمة صور المتجر</h5>
                                 </div>
                                 <!-- .nk-block-head-content -->
                                 <div class="nk-block-head-content">
@@ -60,6 +60,7 @@
                                                 </div>
                                                 <div class="nk-tb-col tb-col-sm"><span>الصورة</span></div>
                                                 <div class="nk-tb-col"><span>العنوان  </span></div>
+                                                <div class="nk-tb-col"><span>نوع الصورة  </span></div>
                                                 <div class="nk-tb-col tb-col-sm"><span>النص البديل</span></div>
                                                 <div class="nk-tb-col"><span>الرابط</span></div>
                                                 <div class="nk-tb-col"><span>الحالة</span></div>
@@ -106,7 +107,12 @@
                                                 </div>
                                                 <div class="nk-tb-col">
                                                     <span class="tb-sub">{{$banner['title']}}</span>
-                                                  </div>
+                                                </div>
+                                                <div class="nk-tb-col">
+                                                    <span class="tb-sub">
+                                                        @if ($banner['type'] == "slider")صورة متحركة@elseif ($banner['type'] == "fixed")صورة ثابتة@endif
+                                                    </span>
+                                                </div>
                                                 <div class="nk-tb-col">
                                                   <span class="tb-sub">{{$banner['alt']}}</span>
                                                 </div>

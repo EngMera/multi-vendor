@@ -31,6 +31,25 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="type"> نوع الصورة   </label>
+                                                        <div class="form-control-wrap ">
+                                                            <div class="form-control-select">
+                                                                <select class="form-control" id="type" name = "type" required >
+                                                                    <option value="">-- اختر من القائمة --</option>
+                                                                    <option @if (!empty($banner['type']&&$banner['type'] == "slider"))
+                                                                        selected="" @endif value="slider">صورة متحركة</option>
+                                                                    <option @if (!empty($banner['type']&&$banner['type'] == "fixed"))
+                                                                    selected="" @endif value="fixed">صورة ثابتة </option>
+                                                                </select>
+                                                                @error('type')<div class="alert alert-danger"> {{$message}}</div>@enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
                                                     <label class="form-label" for="link"> الرابط   </label>
                                                     <div class="form-control-wrap">
                                                         <input type="text" class="form-control " id="link" name="link"

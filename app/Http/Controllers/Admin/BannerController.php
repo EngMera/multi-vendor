@@ -5,7 +5,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-
 class BannerController extends Controller
 {
     public function banners()
@@ -51,19 +50,33 @@ class BannerController extends Controller
             $rules = [
                 'alt'=> 'required',
                 'link'=> 'required',
-
+                'type'=> 'required',
             ];
             $customMessage = [
                 'alt.required'=>'يجب اضافة  النص البديل ',
                 'link.required'=>'يجب اضافة الرابط',
+                'type.required'=>'يجب اختيار نوع الصورة',
+
             ];
             $this->validate($request,$rules,$customMessage);
 
+            $banner->type = $data['type'];
             $banner->link = $data['link'];
             $banner->title = $data['title'];
             $banner->alt = $data['alt'];
 
            // Upload banner Image
+           if ($data['type']== "slider")
+           {
+             $height = "720";
+             $width = "1920";
+           }
+           else if ($data['type']== "fixed")
+           {
+             $height = "450";
+             $width = "1920";
+           }
+
            $uploadPath = 'uploads/banner/';
            if ($request->hasFile('image')) {
                $file = $request->file('image');

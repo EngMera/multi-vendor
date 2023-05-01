@@ -1,5 +1,5 @@
 <!doctype html>
-<html ang="ar" dir="rtl">
+<html lang="ar" dir="rtl">
    @include('layouts.frontend.head')
 
    <body>

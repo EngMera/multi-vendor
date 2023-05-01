@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="{{url('assets/frontend/css/nice-select.min.css')}}">
     <!-- Meanmenu CSS -->
     <link rel="stylesheet" href="{{url('assets/frontend/css/meanmenu.css')}}">
+    <!-- slick CSS -->
+     <link rel="stylesheet" href="{{url('assets/frontend/css/slick.css')}}">
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{url('assets/frontend/css/style.css')}}">
     <!-- Responsive CSS -->

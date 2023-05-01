@@ -2,13 +2,13 @@
     'use strict';
 
     // Mean Menu JS
-    jQuery('.mean-menu').meanmenu({ 
+    jQuery('.mean-menu').meanmenu({
         meanScreenWidth: "991"
     });
 
     // Navbar Area
     $(window).on('scroll', function() {
-        if ($(this).scrollTop() >150){  
+        if ($(this).scrollTop() >150){
             $('.navbar-area').addClass("sticky-nav");
         }
         else{
@@ -31,7 +31,7 @@
 		$(".side-nav-responsive .container .container-3").toggleClass("active");
     });
 
-    // Banner Slider 
+    // Banner Slider
     $('.banner-slider').owlCarousel({
         loop: true,
         margin: 30,
@@ -84,7 +84,7 @@
         autoplayHoverPause: true,
     })
 
-    // Testimonials Slider Two 
+    // Testimonials Slider Two
     $('.testimonials-slider-two').owlCarousel({
         loop: true,
         margin: 30,
@@ -108,7 +108,7 @@
             }
         });
     } catch (err) {}
-        
+
     // Range Slider
     $( "#range-slider" ).slider({
         range: true,
@@ -120,13 +120,13 @@
         }
     });
     $( "#price-amount" ).val( "$" + $( "#range-slider" ).slider( "values", 0 ) +
-    " - $" + $( "#range-slider" ).slider( "values", 1 ) );  
-		
+    " - $" + $( "#range-slider" ).slider( "values", 1 ) );
+
 
     // Tabs Single Page
     $('.tab ul.tabs').addClass('active').find('> li:eq(0)').addClass('current');
     $('.tab ul.tabs li a').on('click', function (g) {
-        var tab = $(this).closest('.tab'), 
+        var tab = $(this).closest('.tab'),
         index = $(this).closest('li').index();
         tab.find('ul.tabs > li').removeClass('current');
         $(this).closest('li').addClass('current');
@@ -143,7 +143,7 @@
         btnDown = spinner.find('.minus-btn'),
         min = input.attr('min'),
         max = input.attr('max');
-        
+
         btnUp.on('click', function() {
             var oldValue = parseFloat(input.val());
             if (oldValue >= max) {
@@ -166,7 +166,7 @@
             spinner.find("input").trigger("change");
         });
     });
-    
+
     // FAQ Accordion JS
 	$('.accordion').find('.accordion-title').on('click', function(){
 		// Adds Active Class
@@ -176,7 +176,7 @@
 		// Hide The Other Panels
 		$('.accordion-content').not($(this).next()).slideUp('fast');
 		// Removes Active Class From Other Titles
-		$('.accordion-title').not($(this)).removeClass('active');		
+		$('.accordion-title').not($(this)).removeClass('active');
     });
 
     // WOW JS
@@ -200,12 +200,12 @@
 
     // Count Time JS
 	function makeTimer() {
-		var endTime = new Date("December 30, 2022 17:00:00 PDT");			
+		var endTime = new Date("December 30, 2022 17:00:00 PDT");
 		var endTime = (Date.parse(endTime)) / 1000;
 		var now = new Date();
 		var now = (Date.parse(now) / 1000);
 		var timeLeft = endTime - now;
-		var days = Math.floor(timeLeft / 86400); 
+		var days = Math.floor(timeLeft / 86400);
 		var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
 		var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600 )) / 60);
 		var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
@@ -259,7 +259,7 @@
         }
         $("#validator-newsletter").removeClass().addClass(msgClasses).text(msg);
     }
-        
+
     // AJAX MailChimp
     $(".newsletter-form").ajaxChimp({
         url: "https://envyTheme.us20.list-manage.com/subscribe/post?u=60e1ffe2e8a68ce1204cd39a5&amp;id=42d6d188d9", // Your url MailChimp
@@ -270,7 +270,7 @@
     jQuery(window).on('load',function(){
         jQuery(".preloader").fadeOut(500);
     });
-    
+
     // Switch Btn
     $('body').append("<div class='switch-box'><label id='switch' class='switch'><input type='checkbox' onchange='toggleTheme()' id='slider'><span class='slider round'></span></label></div>");
 
@@ -301,3 +301,5 @@ function toggleTheme() {
       document.getElementById('slider').checked = true;
     }
 })();
+
+

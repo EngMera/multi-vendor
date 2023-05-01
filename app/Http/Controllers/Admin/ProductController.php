@@ -60,6 +60,7 @@ class ProductController extends Controller
                 'product_name'=> 'required|regex:/^[\pL\s\-]+$/u',
                 'product_code'=> 'required|regex:/^\w+$/u',
                 'product_price'=> 'required|numeric',
+                'product_old_price'=> 'numeric',
                 'category_id'=> 'required',
                 'brand_id'=> 'required',
                 'meta_title'=>'required|max:255',
@@ -74,6 +75,7 @@ class ProductController extends Controller
                 'product_code.regex'=>'تنسيق الكود غير صحيح',
                 'product_price.required'=>'يجب اضافة السعر ',
                 'product_price.numeric'=>' يجب ان يكون السعر رقما ',
+                'product_old_price.numeric'=>' يجب ان يكون السعر رقما ',
                 'category_id.required'=>'يجب اضافة هذا الحقل',
                 'brand_id.required'=>'يجب اضافة هذا الحقل',
                 'meta_title.required'=>' يجب اضافة هذا الحقل',
@@ -108,6 +110,7 @@ class ProductController extends Controller
              $product->product_code = $data['product_code'];
              $product->product_color = $data['product_color'];
              $product->product_price = $data['product_price'];
+             $product->product_old_price = $data['product_old_price'];
              $product->product_discount = $data['product_discount'];
              $product->product_weight = $data['product_weight'];
              $product->description = $data['description'];
@@ -116,7 +119,7 @@ class ProductController extends Controller
              $product->meta_description = $data['meta_description'];
              $product->meta_keywords = $data['meta_keywords'];
 
-             if (!empty($data['is_featured'])) 
+             if (!empty($data['is_featured']))
              {
                 $product->is_featured = $data['is_featured'];
              }
@@ -125,7 +128,16 @@ class ProductController extends Controller
                 $product->is_featured = "لا";
              }
 
-             // Upload product Image 
+             if (!empty($data['is_bestseller']))
+             {
+                $product->is_bestseller = $data['is_bestseller'];
+             }
+             else
+             {
+                $product->is_bestseller = "لا";
+             }
+
+             // Upload product Image
              $uploadPath = 'uploads/product/images/';
              if ($request->hasFile('product_image')) {
                 $file = $request->file('product_image');
@@ -135,7 +147,7 @@ class ProductController extends Controller
                 $product->product_image =  $uploadPath.$filename;
              }
 
-            //  Upload Product Video 
+            //  Upload Product Video
             $uploadPath = 'uploads/product/videos/';
             if ($request->hasFile('product_video')) {
                 $file = $request->file('product_video');
@@ -150,22 +162,22 @@ class ProductController extends Controller
 
             return redirect('admin/products')->with('success_message',$success_message) ;
         }
-       
 
-        // Get Sections With Categories 
+
+        // Get Sections With Categories
         $categories = Section::with('categories')->get()->toArray();
 
         // Get All Brands
         $brands = Brand::where('status',1)->get()->toArray();
 
         return view('admin.products.add-edit-product',compact('product','title','send','success_message','categories','brands'));
-        
+
     }
     public function deleteProductImage($id)
     {
-        $product =  Product::findOrFail($id); 
-        $path = $product->product_image; 
-        if (File::exists($path)) 
+        $product =  Product::findOrFail($id);
+        $path = $product->product_image;
+        if (File::exists($path))
          {
           File::delete($path);
         }
@@ -175,17 +187,17 @@ class ProductController extends Controller
     public function addEditAttributes(Request $request , $id)
     {
         $product =  Product::select('id','product_name','product_code','product_color','product_price','product_image')
-                            ->with('attributes')->findOrFail($id); 
+                            ->with('attributes')->findOrFail($id);
         // $product = json_decode(json_encode($product),true);
-        
+
         $title = "أضافة صفات المنتج ";
         $success_message = "تم أضافة صفات المنتج بنجاح";
         $send = "أضافة";
         if ($request->isMethod('post')) {
             $data = $request->all();
-            foreach ($data['sku'] as $key => $value) 
+            foreach ($data['sku'] as $key => $value)
             {
-                if (!empty($value)) 
+                if (!empty($value))
                 {
                     $skuCount = ProductAttribute::where('sku',$value)->count();
                     if ($skuCount>0)
@@ -210,7 +222,7 @@ class ProductController extends Controller
             }
             return redirect()->back()->with('success_message',$success_message);
         }
-        
+
 
         return view('admin.products.add-edit-attributes',compact('product','title','success_message','send'));
 
@@ -223,14 +235,14 @@ class ProductController extends Controller
                 $data = $request->all();
                 $attributeId = $data['id'];
                 $attribute = ProductAttribute::findOrFail($attributeId);
-    
+
                 $rules = [
                     'size'=>'required|string',
                     'price'=>'required',
                     'sku'=>'required',
                     'stock'=>'required',
                 ];
-    
+
                 $customMessage= [
                     'size.required'=>'هذا الحقل مطلوب',
                     'size.string'=>'هذا الحقل يجب ان يكون نصا ',
@@ -257,13 +269,13 @@ class ProductController extends Controller
 
        if($request->isMethod('post'))
        {
-            // Upload product Image 
+            // Upload product Image
             $i = 0;
             $uploadPath = 'uploads/product/images/';
-            // Upload Product Images 
+            // Upload Product Images
             if ($request->hasFile('image'))
             {
-                foreach ($request->file(['image']) as $image) 
+                foreach ($request->file(['image']) as $image)
                 {
                     $ext = $image->getClientOriginalExtension();
                     $filename = time().$i++.'.'.$ext;
@@ -275,9 +287,9 @@ class ProductController extends Controller
                         'status'=>1,
                     ]);
                 }
-                
+
             }
-            //  Upload Product main image 
+            //  Upload Product main image
             if ($request->hasFile('product_image')) {
                 $file = $request->file('product_image');
                 $extention = $file->getClientOriginalExtension();
@@ -288,7 +300,7 @@ class ProductController extends Controller
             }
             return redirect()->back()->with('success_message',' تم اضافة'.$i.' الصور بنجاح');
        }
-        
+
 
         // return response()->json(['success'=>$imageName]);
         return view('admin.products.add-images',compact('product'));
@@ -296,8 +308,8 @@ class ProductController extends Controller
     public function deleteImage($id)
     {
         $image = ProductImage::findOrFail($id);
-        $path = $image->image; 
-        if (File::exists($path)) 
+        $path = $image->image;
+        if (File::exists($path))
          {
           File::delete($path);
         }
@@ -329,24 +341,24 @@ class ProductController extends Controller
     }
     public function delete($id)
     {
-        $product =  Product::findOrFail($id); 
+        $product =  Product::findOrFail($id);
         $productImage = ProductImage::where('product_id',$id)->get();
-        if (File::exists($product->product_image)) 
+        if (File::exists($product->product_image))
         {
           File::delete($product->product_image);
         }
-        if (!empty($productImage)) 
+        if (!empty($productImage))
         {
 
-            foreach ($productImage as $image) 
+            foreach ($productImage as $image)
             {
                 // dd($image->image);
-                if (File::exists($image->image)) 
+                if (File::exists($image->image))
                 {
                 File::delete($image->image);
                 }
             }
-        
+
         }
         $product->images()->delete();
         $product->delete();

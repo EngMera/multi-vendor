@@ -104,4 +104,6 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
 
 Route::namespace('App\Http\Controllers\Front')->group(function(){
     Route::get('/','IndexController@index');
+    Route::get('products/{id}','IndexController@products');
+
 });

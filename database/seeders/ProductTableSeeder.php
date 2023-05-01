@@ -28,7 +28,8 @@ class ProductTableSeeder extends Seeder
             'product_code'=>'123',
             'product_color'=>'ابيض',
             'product_price'=>100,
-            'product_discount'=>0,
+            'product_old_price'=>120,
+            'product_discount'=>20,
             'product_weight'=>300,
             'product_video'=>'',
             'product_image'=>'',
@@ -38,6 +39,7 @@ class ProductTableSeeder extends Seeder
             'meta_description'=>'تيشرت ابيض',
             'meta_keywords'=>'تيشرت ابيض',
             'is_featured'=>'نعم',
+            'is_bestseller'=>'نعم',
             'status'=>1,
         ];
         Product::create($product);

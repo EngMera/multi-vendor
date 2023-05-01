@@ -4,7 +4,7 @@
 @endsection
 
 @section('style')
-    
+
 @endsection
 @section('content')
     <!-- content @s -->
@@ -15,7 +15,7 @@
                         <div class="card">
                             <div class="card-inner">
                                 <h6 class="title nk-block-title" style="color:#9d72ff">  {{$title}}  </h6>
-                               
+
                                     <form @if (empty($product['product_name']))
                                           action="{{ url('admin/add-edit-product') }}"
                                           @else
@@ -24,12 +24,12 @@
                                           class="form-validate is-alter mt-5 " method="post" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row g-gs">
-                                           
+
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label" for="product_name">اسم المنتج   </label>
                                                     <div class="form-control-wrap">
-                                                        <input type="text" class="form-control " id="product_name" name="product_name" 
+                                                        <input type="text" class="form-control " id="product_name" name="product_name"
                                                         @if (empty($product->product_name))
                                                         placeholder = "ادخل اسم المنتج"product_name
                                                         value="{{old('product_name')}}"@else value="{{$product->product_name}}"@endif  aria-invalid="false" >
@@ -76,7 +76,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="product_code">كود المنتج   </label>
                                                     <div class="form-control-wrap">
-                                                        <input type="text" class="form-control " id="product_code" name="product_code" 
+                                                        <input type="text" class="form-control " id="product_code" name="product_code"
                                                         @if (empty($product->product_code))
                                                         placeholder = "ادخل كود المنتج"
                                                         value="{{old('product_code')}}"@else value="{{$product->product_code}}"@endif  aria-invalid="false" >
@@ -88,7 +88,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="product_price">سعر المنتج   </label>
                                                     <div class="form-control-wrap">
-                                                        <input type="text" class="form-control " id="product_price" name="product_price" 
+                                                        <input type="text" class="form-control " id="product_price" name="product_price"
                                                         @if (empty($product->product_price))
                                                         placeholder = "ادخل سعر المنتج"
                                                         value="{{old('product_price')}}"@else value="{{$product->product_price}}"@endif  aria-invalid="false" >
@@ -98,9 +98,21 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
+                                                    <label class="form-label" for="product_old_price">سعر المنتج السابق   </label>
+                                                    <div class="form-control-wrap">
+                                                        <input type="text" class="form-control " id="product_old_price" name="product_old_price"
+                                                        @if (empty($product->product_old_price))
+                                                        placeholder = "ادخل سعر المنتج"
+                                                        value="{{old('product_old_price')}}"@else value="{{$product->product_old_price}}"@endif  aria-invalid="false" >
+                                                        @error('product_old_price')<div class="alert alert-danger">{{ $message }}</div>@enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
                                                     <label class="form-label" for="product_discount">خصم المنتج   </label>
                                                     <div class="form-control-wrap">
-                                                        <input type="number" class="form-control " id="product_discount" name="product_discount" 
+                                                        <input type="text" class="form-control " id="product_discount" name="product_discount"
                                                         @if (empty($product->product_discount))
                                                         placeholder = "ادخل خصم المنتج"
                                                         value="{{old('product_discount')}}"@else value="{{$product->product_discount}}"@endif  aria-invalid="false" >
@@ -112,7 +124,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="product_weight">وزن المنتج   </label>
                                                     <div class="form-control-wrap">
-                                                        <input type="number" class="form-control " id="product_weight" name="product_weight" 
+                                                        <input type="number" class="form-control " id="product_weight" name="product_weight"
                                                         @if (empty($product->product_weight))
                                                         placeholder = "ادخل وزن المنتج"
                                                         value="{{old('product_weight')}}"@else value="{{$product->product_weight}}"@endif  aria-invalid="false" >
@@ -124,7 +136,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="product_color">لون المنتج   </label>
                                                     <div class="form-control-wrap">
-                                                        <input type="color" class="form-control " id="product_color" name="product_color" 
+                                                        <input type="color" class="form-control " id="product_color" name="product_color"
                                                         @if (empty($product->product_color))
                                                         placeholder = "ادخل وزن المنتج"
                                                         value="{{old('product_color')}}"@else value="{{$product->product_color}}"@endif  aria-invalid="false" >
@@ -136,7 +148,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="description">وصف قصير للمنتج   </label>
                                                     <div class="form-control-wrap">
-                                                        <input type="text" class="form-control " id="description" name="description" 
+                                                        <input type="text" class="form-control " id="description" name="description"
                                                         @if (empty($product->description))
                                                         placeholder = "ادخل وصف قصير للمنتج"
                                                         value="{{old('description')}}"@else value="{{$product->description}}"@endif  aria-invalid="false" >
@@ -151,7 +163,7 @@
                                                         <textarea type="text" class="form-control " id="long_description" name="long_description" >
                                                             @if (empty($product->long_description))
                                                               {{old('long_description')}}@else {{$product->long_description}}
-                                                            @endif  
+                                                            @endif
                                                        </textarea >
                                                         @error('long_description')<div class="alert alert-danger">{{ $message }}</div>@enderror
                                                     </div>
@@ -203,7 +215,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="meta_title">عنوان الميتا    </label>
                                                     <div class="form-control-wrap">
-                                                        <input type="text" class="form-control " id="meta_title" name="meta_title" 
+                                                        <input type="text" class="form-control " id="meta_title" name="meta_title"
                                                         @if (empty($product->meta_title))
                                                         placeholder = "ادخل عنوان الميتا "
                                                         value="{{old('meta_title')}}"@else value="{{$product->meta_title}}"@endif  aria-invalid="false" >
@@ -215,7 +227,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="meta_description">وصف الميتا    </label>
                                                     <div class="form-control-wrap">
-                                                        <input type="text" class="form-control " id="meta_description" name="meta_description" 
+                                                        <input type="text" class="form-control " id="meta_description" name="meta_description"
                                                         @if (empty($product->meta_description))
                                                         placeholder = "ادخل وصف الميتا"
                                                         value="{{old('meta_description')}}"@else value="{{$product->meta_description}}"@endif  aria-invalid="false" >
@@ -226,7 +238,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="meta_keywords">الكلمات المفتاحية   </label>
                                                     <div class="form-control-wrap">
-                                                        <input type="text" class="form-control " id="meta_keywords" name="meta_keywords" 
+                                                        <input type="text" class="form-control " id="meta_keywords" name="meta_keywords"
                                                         @if (empty($product->meta_keywords))
                                                         placeholder = "ادخل الكلمات المفتاحية"
                                                         value="{{old('meta_keywords')}}"@else value="{{$product->meta_keywords}}"@endif  aria-invalid="false" >
@@ -234,8 +246,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <hr class="hr border-light">
-                                            <div class="col-md-6 ">
+                                            <hr >
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label class="form-label me-3 " for="site-off">الحالة </label>
                                                     <div class=" custom-control custom-switch ">
@@ -245,13 +257,23 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 ">
+                                            <div class="col-md-4 ">
                                                 <div class="form-group">
                                                     <label class="form-label me-3 " for="is_featured">متميز </label>
                                                     <div class=" custom-control custom-switch ">
                                                         <input type="checkbox" class="custom-control-input" name="is_featured" id="is_featured" value="نعم"
                                                             @if(!empty($product['is_featured']) && $product['is_featured']== "نعم") checked="" @endif>
                                                         <label class="custom-control-label" for="is_featured"><small>مميز نعم / لا</small></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 ">
+                                                <div class="form-group">
+                                                    <label class="form-label me-3 " for="is_bestseller">الاكثر مبيعا </label>
+                                                    <div class=" custom-control custom-switch ">
+                                                        <input type="checkbox" class="custom-control-input" name="is_bestseller" id="is_bestseller" value="نعم"
+                                                            @if(!empty($product['is_bestseller']) && $product['is_bestseller']== "نعم") checked="" @endif>
+                                                        <label class="custom-control-label" for="is_bestseller"><small>مميز نعم / لا</small></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -262,7 +284,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -311,11 +333,11 @@
         @endif
 
 
-        
-       
- 
+
+
+
     <!-- content @s -->
 @endsection
 @section('scripts')
-    
+
 @endsection

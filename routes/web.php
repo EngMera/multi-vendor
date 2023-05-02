@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,22 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::namespace('App\Http\Controllers\Front')->group(function(){
+    Route::get('/','IndexController@index');
+
+    // products
+    Route::get('products/{id?}','ProductController@products');
+
+    $catUrls = Category::select('url')->where('status',1)->get()->pluck('url')->toArray();
+    // dd($catUrls);
+
+    foreach ($catUrls as $key => $url) {
+        Route::get('/'.$url,'ProductController@listing');
+
+    }
+
+
+});
 
 // Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -102,8 +119,4 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
     });
 });
 
-Route::namespace('App\Http\Controllers\Front')->group(function(){
-    Route::get('/','IndexController@index');
-    Route::get('products/{id}','IndexController@products');
 
-});

@@ -35,4 +35,18 @@ class Category extends Model
     {
         return $this->hasMany(Category::class,'parent_id')->where('status',1);
     }
+    public static function categoryDetails($url)
+    {
+        $categoryDetails = Category::select('id','category_name','url')->with('subcategories')
+                                    ->where('url',$url)->first()->toArray();
+
+        $catIds = array();
+        $catIds[] = $categoryDetails['id'];
+        foreach ($categoryDetails['subcategories'] as $key => $subCat)
+        {
+            $catIds[] = $subCat['id'];
+        }
+        $resp = array('catIds'=>$catIds, 'categoryDetails'=>$categoryDetails);
+        return $resp ;
+    }
 }

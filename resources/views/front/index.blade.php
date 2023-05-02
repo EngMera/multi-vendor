@@ -73,9 +73,11 @@
                                         <a href="{{url('products/'.$newProduct['id'])}}">
                                             <img src="{{$newProduct['product_image']}}" alt="{{$newProduct['product_name']}}">
                                         </a>
-                                        <div class="product-item-tag">
-                                            <h3>جديد</h3>
-                                        </div>
+                                        @if (!empty($newProduct['product_discount']))
+                                            <div class="product-item-tag">
+                                                <h3>خصم {{$newProduct['product_discount']}}</h3>
+                                            </div>
+                                        @endif
                                         <ul class="product-item-action">
                                             <li><a href="#"><i class="bx bx-repost"></i></a></li>
                                             <li><a href="wishlist.html"><i class="bx bx-heart"></i></a></li>
@@ -98,8 +100,8 @@
 
                                         <div class="d-flex justify-content-between align-items-center pb-3">
                                             <div><strong >{{$newProduct['product_price']}} </strong><span>ر.س</span></div>
-                                            @if (!empty($newProduct['product_discount']))
-                                            <div style="padding-left: 20px"><del class="float-left"style="font-size:20px; font-weight:500">{{$newProduct['product_discount']}} </del><span>ر.س</span></div>
+                                            @if (!empty($newProduct['product_old_price']))
+                                            <div style="padding-left: 20px"><del class="float-left"style="font-size:20px; font-weight:500">{{$newProduct['product_old_price']}} </del><span>ر.س</span></div>
                                             @endif
                                         </div>
                                     </div>
@@ -126,9 +128,11 @@
                                        <a href="{{url('products/'.$bestProduct['id'])}}">
                                            <img src="{{$bestProduct['product_image']}}" alt="{{$bestProduct['product_name']}}">
                                        </a>
-                                       <div class="product-item-tag">
-                                           <h3>جديد</h3>
-                                       </div>
+                                       @if (!empty($bestProduct['product_discount']))
+                                        <div class="product-item-tag">
+                                            <h3>خصم {{$bestProduct['product_discount']}}</h3>
+                                        </div>
+                                       @endif
                                        <ul class="product-item-action">
                                            <li><a href="#"><i class="bx bx-repost"></i></a></li>
                                            <li><a href="wishlist.html"><i class="bx bx-heart"></i></a></li>
@@ -151,8 +155,8 @@
 
                                        <div class="d-flex justify-content-between align-items-center pb-3">
                                            <div><strong >{{$bestProduct['product_price']}} </strong><span>ر.س</span></div>
-                                           @if (!empty($bestProduct['product_discount']))
-                                           <div style="padding-left: 20px"><del class="float-left"style="font-size:20px; font-weight:500">{{$bestProduct['product_discount']}} </del><span>ر.س</span></div>
+                                           @if (!empty($bestProduct['product_old_price']))
+                                           <div style="padding-left: 20px"><del class="float-left"style="font-size:20px; font-weight:500">{{$bestProduct['product_old_price']}} </del><span>ر.س</span></div>
                                            @endif
                                        </div>
                                    </div>
@@ -180,9 +184,11 @@
                                         <a href="{{url('products/'.$featuredProduct['id'])}}">
                                             <img src="{{$featuredProduct['product_image']}}" alt="{{$featuredProduct['product_name']}}">
                                         </a>
-                                        <div class="product-item-tag">
-                                            <h3>جديد</h3>
-                                        </div>
+                                        @if (!empty($featuredProduct['product_discount']))
+                                            <div class="product-item-tag">
+                                                <h3>خصم {{$featuredProduct['product_discount']}}</h3>
+                                            </div>
+                                        @endif
                                         <ul class="product-item-action">
                                             <li><a href="#"><i class="bx bx-repost"></i></a></li>
                                             <li><a href="wishlist.html"><i class="bx bx-heart"></i></a></li>
@@ -205,8 +211,8 @@
 
                                         <div class="d-flex justify-content-between align-items-center pb-3">
                                             <div><strong >{{$featuredProduct['product_price']}} </strong><span>ر.س</span></div>
-                                            @if (!empty($featuredProduct['product_discount']))
-                                            <div style="padding-left: 20px"><del class="float-left"style="font-size:20px; font-weight:500">{{$featuredProduct['product_discount']}} </del><span>ر.س</span></div>
+                                            @if (!empty($featuredProduct['product_old_price']))
+                                            <div style="padding-left: 20px"><del class="float-left"style="font-size:20px; font-weight:500">{{$featuredProduct['product_old_price']}} </del><span>ر.س</span></div>
                                             @endif
                                         </div>
                                     </div>

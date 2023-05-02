@@ -18,18 +18,23 @@
 
                 <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                     <ul class="navbar-nav m-auto">
+                        <li class="nav-item">
+                            <a href="{{url('products')}}" class="nav-link active">
+                                جميع المنتجات
+                             </a>
+                        </li>
                         @foreach ($getSections as $section)
                             @if (count($section['categories'])>0)
                             <li class="nav-item">
                                 <a href="#" class="nav-link active">
                                     {{$section['name']}}
                                     <i class="bx bx-chevron-down"></i>
-                                </a>
+                                 </a>
                                 @if (count($section['categories'])>0)
                                 <ul class="dropdown-menu">
                                     @foreach ($section['categories'] as $category)
                                         <li class="nav-item">
-                                            <a href="{{url($category['url'])}}" class="nav-link ">
+                                            <a  @if (count($category['subcategories'])<1) href="{{url($category['url'])}}"@endif class="nav-link ">
                                                 {{$category->category_name}}
                                                 @if (count($category['subcategories'])>0)
                                                 <i class="bx bx-chevron-down"></i>

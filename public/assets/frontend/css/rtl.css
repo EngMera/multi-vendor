@@ -847,7 +847,7 @@ body {
 
 .product-item .product-img .product-item-tag {
   right: auto;
-  left: 10px;
+  left: 0px;
 }
 
 .product-item .product-img .product-item-action {

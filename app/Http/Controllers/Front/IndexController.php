@@ -25,8 +25,5 @@ class IndexController extends Controller
         // dd($bestCount);
         return view('front.index',compact('sliderBanners','fixedBanners','newProducts','bestProducts','featuredProducts','featureCount' ,'newCount','bestCount'));
     }
-    public function products($id)
-    {
-        return $id;
-    }
+
 }

@@ -29,9 +29,9 @@ class ProductController extends Controller
         if ($categoryCount>0)
         {
             $categoryDetails = Category::categoryDetails($url);
-            $categoryProducts = Product::whereIn('category_id',$categoryDetails['catIds'])
+            $categoryProducts = Product::with('brand')->whereIn('category_id',$categoryDetails['catIds'])
                                          ->where('status',1)->get()->toArray();
-            // dd($categoryProducts);
+            dd($categoryProducts);
             return view('front.products.listing',compact('categoryDetails','categoryProducts'));
         }
         else

@@ -34,7 +34,7 @@
                                 <ul class="dropdown-menu">
                                     @foreach ($section['categories'] as $category)
                                         <li class="nav-item">
-                                            <a  @if (count($category['subcategories'])<1) href="{{url($category['url'])}}"@endif class="nav-link ">
+                                            <a   href="{{url($category['url'])}}" class="nav-link ">
                                                 {{$category->category_name}}
                                                 @if (count($category['subcategories'])>0)
                                                 <i class="bx bx-chevron-down"></i>

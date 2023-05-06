@@ -37,8 +37,10 @@ class Category extends Model
     }
     public static function categoryDetails($url)
     {
-        $categoryDetails = Category::select('id','category_name','url')->with('subcategories')
-                                    ->where('url',$url)->first()->toArray();
+        $categoryDetails = Category::select('id','category_name','url','description')->with(['subcategories'=>
+                       function($query){
+                        $query->select('id','parent_id','category_name','url','description');
+                       }])->where('url',$url)->first()->toArray();
 
         $catIds = array();
         $catIds[] = $categoryDetails['id'];

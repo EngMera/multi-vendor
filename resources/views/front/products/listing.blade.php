@@ -10,32 +10,46 @@
             <div class="row">
                 <div class="col-lg-8 col-md-8">
                     <div class="product-topper-title">
-                        <h3>جميع المنتجات <span>( Showing 1-15 of 120 result )</span> </h3>
+                        <h3> {{$categoryDetails['categoryDetails']['category_name']}} <span></span> </h3>
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-md-4">
-                    <div class="product-category">
-                        <div class="form-group">
-                            <select class="form-control" style="display: none;">
-                                <option>التصنيفات</option>
-                                <option>Beef Meat</option>
-                                <option>Vegetable</option>
-                                <option>Natural Fruits</option>
-                                <option>Health &amp; Beauty</option>
+                    <select name="" id="" class="form-select">
+                        <option>mera</option>
+
+                    </select>
+
+                        {{-- <div class="form-group">
+                            <select class="form-control" style=>
+                                <optgroup label="Swedish Cars">
+                                    <option value="volvo">Volvo</option>
+                                    <option value="saab">Saab</option>
+                                </optgroup>
                             </select>
                             <div class="nice-select form-control" tabindex="0">
                                 <span class="current">التصنيفات</span>
-                                <ul class="list">
-                                    <li data-value="Categories" class="option selected">Categories</li>
-                                    <li data-value="Beef Meat" class="option">Beef Meat</li>
-                                    <li data-value="Vegetable" class="option">Vegetable</li>
-                                    <li data-value="Natural Fruits" class="option">Natural Fruits</li>
-                                    <li data-value="Health &amp; Beauty" class="option">Health &amp; Beauty</li>
-                                </ul>
+                                <select class="list">
+                                     @foreach ($sections as $section)
+                                     <optgroup value="{{$section['name']}}" class="option selected">
+                                        {{$section['name']}}
+                                        @if (count($section['categories'])>0)
+                                            @foreach ($section['categories'] as $category)
+                                            <option value="{{$category['category_name']}}" class="option selected">
+                                               {{$category['category_name']}}
+
+                                            </option>
+                                            @endforeach
+                                       @endif
+
+                                     </optgroup>
+
+
+                                     @endforeach
+
+                                </select>
                             </div>
-                        </div>
-                    </div>
+                        </div> --}}
                 </div>
             </div>
         </div>
